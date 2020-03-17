@@ -22,6 +22,6 @@ func main() { //Init servant
 		}
 	})
 	servCfg := tars.GetServerConfig()
-	tars.AddHttpServant(mux, servCfg.App+"."+servCfg.Server+".TestObj") //Register http server
+	tars.AddHttpServant(mux, servCfg.App+"."+servCfg.Server+".HelloObj") //Register http server
 	tars.Run()
 }
