@@ -40,10 +40,10 @@ class PHPServant(Project):
         self.ping_tars()
 
     def ping_http(self):
-        self._test_http_get("{0}/test/ping")
+        self._ping_http("{0}/test/ping")
 
     def ping_tars(self):
-        self._test_http_get("{0}/test/pingPHP")
+        self._ping_http("{0}/test/pingPHP")
 
     def report(self):
         self._print_info("Language Name: {0}".format(TARGET_LANGUAGE))

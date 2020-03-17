@@ -99,7 +99,7 @@ class Project(metaclass=ABCMeta):
     def _print_info(content):
         print("\033[34m{0} \033[0m".format(content))
 
-    def _test_http_get(self, test_case):
+    def _ping_http(self, test_case):
         self._total_test_cnt += 1
         result = requests.get(test_case.format(self._web_url))
         if result != 'pong':
