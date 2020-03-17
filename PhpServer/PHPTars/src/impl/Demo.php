@@ -2,9 +2,9 @@
 
 namespace PHPTars\impl;
 
-use PHPTars\servant\Demo\PHPTars\HelloObj\Hello;
+use PHPTars\servant\Demo\PHPTars\HelloObj\HelloServant;
 
-class Demo implements Hello
+class Demo implements HelloServant
 {
     public function ping()
     {

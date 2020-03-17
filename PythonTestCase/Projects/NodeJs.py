@@ -2,37 +2,38 @@
 from ProjectBase import Project, PROJECT_ROOT
 import os
 
-TARGET_LANGUAGE = 'GoLang'
+TARGET_LANGUAGE = 'NodeJs'
 APP_NAME = 'Demo'
 
 
-# GoLang test class
-class GoLangServant(Project):
-    def deploy(self):
+# NodeJs test class
+class NodeJsServant(Project):
+    def publish(self):
         self._deploy_http()
         self._deploy_tars()
 
     def _deploy_http(self):
-        prj_dir = os.path.join(PROJECT_ROOT, 'GoServer/GoHttp')
+        prj_dir = os.path.join(PROJECT_ROOT, 'NodejsServer/NodejsHttp')
         self._upload_and_publish(
             app_name=APP_NAME,
-            module_name='GoHttp',
+            module_name='NodejsHttp',
             pkg_dir=prj_dir,
-            pkg_name_prefix='GoHttp',
+            pkg_name_prefix='NodejsHttp',
             pkg_ext='.tgz'
         )
 
     def _deploy_tars(self):
-        prj_dir = os.path.join(PROJECT_ROOT, 'GoServer/GoTars')
+        prj_dir = os.path.join(PROJECT_ROOT, 'NodejsServer/NodejsTars')
         self._upload_and_publish(
             app_name=APP_NAME,
-            module_name='GoTars',
+            module_name='NodejsTars',
             pkg_dir=prj_dir,
-            pkg_name_prefix='GoTars',
+            pkg_name_prefix='NodejsTars',
             pkg_ext='.tgz'
         )
 
     def run_test(self):
+        self._print_info("Start testing {0}".format(TARGET_LANGUAGE))
         self.ping_http()
         self.ping_tars()
 
@@ -40,7 +41,7 @@ class GoLangServant(Project):
         self._test_http_get("{0}/test/ping")
 
     def ping_tars(self):
-        self._test_http_get("{0}/test/pingGo")
+        self._test_http_get("{0}/test/pingJs")
 
     def report(self):
         self._print_info("Language Name: {0}".format(TARGET_LANGUAGE))

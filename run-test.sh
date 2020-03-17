@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 #公共函数
@@ -137,11 +137,17 @@ exec_mysql_sql db_tars sql.tmp/tars-demo.sql
 
 rm -rf sql.tmp
 
-#cpp
+# ===============================build test projects=============================
+
+# --------------------------------------cpp--------------------------------------
+mkdir CppServer/build
 cd CppServer/build
 cmake .. -DTARS_WEB_HOST=${WEB_HOST} -DTARS_TOKEN=${TOKEN}
 make -j4
 make tar
 make upload
+cd ../..
 
-#java
+# ===============================run test=======================================
+cd PythonTestCase/
+python3 run.py -u ${WEB_HOST} -t ${TOKEN}

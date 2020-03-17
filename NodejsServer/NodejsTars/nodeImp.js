@@ -14,5 +14,5 @@ Demo.HelloImp.prototype.initialize = function () {
 };
 
 Demo.HelloImp.prototype.ping = function (current) {
-    return "pong"
+    return "pong";
 };

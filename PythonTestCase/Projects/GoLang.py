@@ -1,42 +1,39 @@
 # coding: utf-8
 from ProjectBase import Project, PROJECT_ROOT
 import os
-import requests
-import time
 
-TARGET_LANGUAGE = 'PHP'
+TARGET_LANGUAGE = 'GoLang'
 APP_NAME = 'Demo'
 
 
-# PHP test class
-class PHPServant(Project):
-    def deploy(self):
+# GoLang test class
+class GoLangServant(Project):
+    def publish(self):
         self._deploy_http()
         self._deploy_tars()
 
     def _deploy_http(self):
-        prj_dir = os.path.join(PROJECT_ROOT, 'PhpServer/PHPHttp')
-        pkg_dir = os.path.join(prj_dir, 'src')
+        prj_dir = os.path.join(PROJECT_ROOT, 'GoServer/GoHttp')
         self._upload_and_publish(
             app_name=APP_NAME,
-            module_name='PHPHttp',
-            pkg_dir=pkg_dir,
-            pkg_name_prefix='PHPHttp',
-            pkg_ext='.tar.gz'
+            module_name='GoHttp',
+            pkg_dir=prj_dir,
+            pkg_name_prefix='GoHttp',
+            pkg_ext='.tgz'
         )
 
     def _deploy_tars(self):
-        prj_dir = os.path.join(PROJECT_ROOT, 'PhpServer/PHPTars')
-        pkg_dir = os.path.join(prj_dir, 'src')
+        prj_dir = os.path.join(PROJECT_ROOT, 'GoServer/GoTars')
         self._upload_and_publish(
             app_name=APP_NAME,
-            module_name='PHPTars',
-            pkg_dir=pkg_dir,
-            pkg_name_prefix='PHPTars',
-            pkg_ext='.tar.gz'
+            module_name='GoTars',
+            pkg_dir=prj_dir,
+            pkg_name_prefix='GoTars',
+            pkg_ext='.tgz'
         )
 
     def run_test(self):
+        self._print_info("Start testing {0}".format(TARGET_LANGUAGE))
         self.ping_http()
         self.ping_tars()
 
@@ -44,7 +41,7 @@ class PHPServant(Project):
         self._test_http_get("{0}/test/ping")
 
     def ping_tars(self):
-        self._test_http_get("{0}/test/pingPHP")
+        self._test_http_get("{0}/test/pingGo")
 
     def report(self):
         self._print_info("Language Name: {0}".format(TARGET_LANGUAGE))

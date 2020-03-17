@@ -2,37 +2,38 @@
 from ProjectBase import Project, PROJECT_ROOT
 import os
 
-TARGET_LANGUAGE = 'NodeJs'
+TARGET_LANGUAGE = 'Java'
 APP_NAME = 'Demo'
 
 
-# NodeJs test class
-class NodeJsServant(Project):
-    def deploy(self):
+# Java test class
+class JavaServant(Project):
+    def publish(self):
         self._deploy_http()
         self._deploy_tars()
 
     def _deploy_http(self):
-        prj_dir = os.path.join(PROJECT_ROOT, 'NodejsServer/NodejsHttp')
+        prj_dir = os.path.join(PROJECT_ROOT, 'JavaServer/JavaHttp')
         self._upload_and_publish(
             app_name=APP_NAME,
-            module_name='NodejsHttp',
+            module_name='JavaHttp',
             pkg_dir=prj_dir,
-            pkg_name_prefix='NodejsHttp',
+            pkg_name_prefix='JavaHttp',
             pkg_ext='.tgz'
         )
 
     def _deploy_tars(self):
-        prj_dir = os.path.join(PROJECT_ROOT, 'NodejsServer/NodejsTars')
+        prj_dir = os.path.join(PROJECT_ROOT, 'JavaServer/JavaTars')
         self._upload_and_publish(
             app_name=APP_NAME,
-            module_name='NodejsTars',
+            module_name='JavaTars',
             pkg_dir=prj_dir,
-            pkg_name_prefix='NodejsTars',
+            pkg_name_prefix='JavaTars',
             pkg_ext='.tgz'
         )
 
     def run_test(self):
+        self._print_info("Start testing {0}".format(TARGET_LANGUAGE))
         self.ping_http()
         self.ping_tars()
 
@@ -40,7 +41,7 @@ class NodeJsServant(Project):
         self._test_http_get("{0}/test/ping")
 
     def ping_tars(self):
-        self._test_http_get("{0}/test/pingJs")
+        self._test_http_get("{0}/test/pingJava")
 
     def report(self):
         self._print_info("Language Name: {0}".format(TARGET_LANGUAGE))

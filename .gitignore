@@ -5,17 +5,23 @@ CppServer/build
 # golang
 ./GoServer/GoHttp/vendor/*
 ./GoServer/GoHttp/go.sum
+./GoServer/GoHttp/*.tgz
 ./GoServer/GoTars/vendor/*
 ./GoServer/GoTars/go.sum
+./GoServer/GoTars/*.tgz
 
 
 # php
 ./PhpServer/PHPHttp/.idea/*
 ./PhpServer/PHPHttp/src/vendor/*
 ./PhpServer/PHPHttp/src/composer.lock
+./PhpServer/PHPHttp/src/servant/*
+./PhpServer/PHPHttp/src/*.tar.gz
 ./PhpServer/PHPTars/.idea/*
 ./PhpServer/PHPTars/src/vendor/*
 ./PhpServer/PHPTars/src/composer.lock
+./PhpServer/PHPTars/src/servant/*
+./PhpServer/PHPTars/src/*.tar.gz
 
 
 # nodejs

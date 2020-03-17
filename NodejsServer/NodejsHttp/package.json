@@ -5,5 +5,8 @@
   "main": "app.js",
   "scripts": {},
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@tars/rpc": "^2.0.11"
+  }
 }
