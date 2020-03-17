@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7079ab6-bbd3-438c-9aa1-a432f620c13a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/PythonTestCase/Projects/Cpp.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonTestCase/Projects/Cpp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonTestCase/Projects/GoLang.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonTestCase/Projects/GoLang.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonTestCase/Projects/Java.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonTestCase/Projects/Java.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonTestCase/Projects/NodeJs.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonTestCase/Projects/NodeJs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonTestCase/Projects/PHP.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonTestCase/Projects/PHP.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonTestCase/Projects/ProjectBase.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonTestCase/Projects/ProjectBase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/TarsDemo.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/R_User_Library.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,15 +37,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sql/tars-demo.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GoServer/GoHttp/GoHttp.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
@@ -56,7 +49,7 @@
         <entry file="file://$PROJECT_DIR$/NodejsServer/NodejsHttp/app.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="113">
-              <caret line="13" column="17" lean-forward="true" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+              <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -110,7 +103,7 @@
         <entry file="file://$PROJECT_DIR$/PythonTestCase/run.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="303">
-              <caret line="68" column="18" lean-forward="true" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
+              <caret line="68" column="18" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
               <folding>
                 <element signature="e#17#52#0" expanded="true" />
               </folding>
@@ -118,11 +111,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PythonTestCase/Projects/Cpp.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="209">
               <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -168,6 +170,7 @@
         <option value="$PROJECT_DIR$/PythonTestCase/Projects/Java.py" />
         <option value="$PROJECT_DIR$/PythonTestCase/Projects/GoLang.py" />
         <option value="$PROJECT_DIR$/PythonTestCase/Projects/Cpp.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -506,14 +509,14 @@
     <entry file="file://$PROJECT_DIR$/NodejsServer/NodejsHttp/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="113">
-          <caret line="13" column="17" lean-forward="true" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PythonTestCase/run.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
-          <caret line="68" column="18" lean-forward="true" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
+          <caret line="68" column="18" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
           <folding>
             <element signature="e#17#52#0" expanded="true" />
           </folding>
@@ -571,6 +574,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
         </state>
       </provider>
     </entry>

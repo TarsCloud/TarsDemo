@@ -1,5 +1,8 @@
-CppServer/build
 .vscode/*
+.idea/*
+
+# cpp
+CppServer/build
 
 
 # golang
