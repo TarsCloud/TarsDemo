@@ -1,0 +1,8 @@
+module Demo
+{
+    interface Hello
+    {
+        string ping();
+    };
+
+};

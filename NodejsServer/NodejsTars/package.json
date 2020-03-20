@@ -1,0 +1,12 @@
+{
+  "name": "demo.nodejshttp.helloobj",
+  "version": "1.0.0",
+  "description": "a http test project for nodejs",
+  "main": "app.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tars/rpc": "^2.0.11"
+  }
+}

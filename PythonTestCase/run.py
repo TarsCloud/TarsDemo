@@ -1,0 +1,81 @@
+#!/usr/local/bin/python3
+# coding: utf-8
+
+from Projects.PHP import PHPServant
+from Projects.GoLang import GoLangServant
+from Projects.NodeJs import NodeJsServant
+from Projects.Java import JavaServant
+from Projects.Cpp import CppServant
+import threading as td
+import time
+import optparse
+
+
+# get web url and user token from runtime parameters
+def get_web_url_and_token():
+    usage = "python %prog -u/--url <the url of framework web> -t/--token <the user token of framework web>"
+    parser = optparse.OptionParser(usage=usage)
+    parser.add_option('-u', '--url', dest='url', type='string', help='the url of framework web', default='')
+    parser.add_option('-t', '--token', dest='token', type='string', help='the user token of framework web')
+    options, _ = parser.parse_args()
+    if options.url is None:
+        parser.print_help()
+        exit(1)
+    if options.token is None:
+        parser.print_help()
+        exit(1)
+    return options.url, options.token
+
+
+# publish and test servants in multi-threading
+def publish_and_test_servants():
+    # publish
+    deploy_php = td.Thread(target=php_serv.publish_and_test, args=())
+    deploy_php.start()
+    deploy_golang = td.Thread(target=golang_serv.publish_and_test, args=())
+    deploy_golang.start()
+    deploy_nodejs = td.Thread(target=nodejs_serv.publish_and_test, args=())
+    deploy_nodejs.start()
+    deploy_java = td.Thread(target=java_serv.publish_and_test, args=())
+    deploy_java.start()
+    deploy_cpp = td.Thread(target=cpp_serv.publish_and_test, args=())
+    deploy_cpp.start()
+
+    # wait
+    deploy_php.join()
+    deploy_golang.join()
+    deploy_nodejs.join()
+    deploy_java.join()
+    deploy_cpp.join()
+
+
+# get runtime parameters
+url, token = get_web_url_and_token()
+
+# initialize languages test cases
+php_serv = PHPServant(url, token)
+golang_serv = GoLangServant(url, token)
+nodejs_serv = NodeJsServant(url, token)
+java_serv = JavaServant(url, token)
+cpp_serv = CppServant(url, token)
+
+t1 = time.time()
+
+if __name__ == '__main__':
+    print("=====================================Publishing And Testing======================================")
+    # deploy servant
+    publish = td.Thread(target=publish_and_test_servants)
+    publish.start()
+    publish.join()
+
+    # report
+    print("============================================Reporting============================================")
+    php_serv.report()
+    golang_serv.report()
+    nodejs_serv.report()
+    java_serv.report()
+    cpp_serv.report()
+
+    t2 = time.time()
+    duration = t2 - t1
+    print("Duration: {0} seconds".format(duration))

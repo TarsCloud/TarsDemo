@@ -29,7 +29,7 @@ public:
     /**
      *
      */
-    virtual int test(tars::TarsCurrentPtr current) { return 0;};
+    virtual string ping(tars::TarsCurrentPtr current) { return "pong"; };
 };
 /////////////////////////////////////////////////////
 #endif
