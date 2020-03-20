@@ -62,11 +62,11 @@ class Project(metaclass=ABCMeta):
             "module_name": module_name,
             "comment": "developer-auto-upload",
             "task_id": time.time(),
+            "ticket" : self._web_token,
         }
         files = {'suse': (pkg_name, open(pkg_fname, "rb"))}
         headers = {
             "Content-Type": "multipart/form-data",
-            'token': self._web_token
         }
         url = "{0}/api/upload_and_publish".format(self._web_url)
         result = requests.post(url=url, data=data, headers=headers, files=files)
