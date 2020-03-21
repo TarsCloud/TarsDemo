@@ -16,7 +16,7 @@ echo "docker pull tars framework"
 docker pull tarscloud/framework
 
 echo "docker run tars framework"
-docker run --net=host -e MYSQL_HOST=${HOSTIP} -e MYSQL_ROOT_PASSWORD=12345 \
+docker run --net=host -itd -e MYSQL_HOST=${HOSTIP} -e MYSQL_ROOT_PASSWORD=12345 \
         -eREBUILD=true -eINET=eth0 -eSLAVE=false \
         -v/data/tars:/data/tars \
         -v/etc/localtime:/etc/localtime \
