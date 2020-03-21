@@ -4,6 +4,8 @@ ifconfig
 
 HOSTIP=`ifconfig | sed 's/addr//g' | grep eth0 -A3 | grep "inet " | awk -F'[ :]+' '{print $3}'`
 
+echo HOSTIP:${HOSTIP}
+
 docker pull mysql:5.6
 
 docker run -dit -p 3306:3306 -e MYSQL_ROOT_PASSWORD=12345 mysql:5.6 
