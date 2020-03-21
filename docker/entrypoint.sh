@@ -57,11 +57,12 @@ do
 			cat /usr/local/app/tars/tarsnode/conf/tars.tarsnode.config.conf 
 			echo "install tarsnode succ, check tarsnode alive"
 
-			while [ 1 ]
-			do
-				sleep 3
-				/usr/local/app/tars/tarsnode/util/check.sh
-			done
+			/usr/local/app/tars/tarsnode/util/check.sh
+
+			sleep 1
+
+			/root/autotest/run-test.sh ${MYSQL_HOST} 3306 root 123456 ${WEB_HOST} ${MachineIp} ${TARS_TOKEN}
+			exit 0
 		fi
 
 	fi
