@@ -22,6 +22,11 @@ else
 	MachineIp=$(ip addr | grep inet | grep eth0 | awk '{print $2;}' | sed 's|/.*$||')
 fi
 
+echo "WEB_HOST:    ${WEB_HOST}"
+echo "MachineIp:   ${MachineIp}"
+echo "MYSQL_HOST:  ${MYSQL_HOST}"
+echo "TARS_TOKEN:  ${TARS_TOKEN}"
+
 mkdir -p /usr/local/app/tars/
 mkdir -p /usr/local/app/tars/tarsnode
 
@@ -61,7 +66,7 @@ do
 
 			sleep 1
 
-			/root/autotest/run-test.sh ${MYSQL_HOST} 3306 root 123456 ${WEB_HOST} ${MachineIp} ${TARS_TOKEN}
+			/root/autotest/docker/run-test.sh ${MYSQL_HOST} 3306 root 123456 ${WEB_HOST} ${MachineIp} ${TARS_TOKEN}
 			exit 0
 		fi
 
