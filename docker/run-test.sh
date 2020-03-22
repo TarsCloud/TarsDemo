@@ -138,7 +138,8 @@ exec_mysql_sql db_tars sql.tmp/tars-demo.sql
 rm -rf sql.tmp
 
 # ===============================build test projects=============================
-
+pwd
+ls 
 # --------------------------------------cpp--------------------------------------
 mkdir CppServer/build
 cd CppServer/build

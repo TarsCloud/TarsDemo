@@ -22,6 +22,11 @@ else
 	MachineIp=$(ip addr | grep inet | grep eth0 | awk '{print $2;}' | sed 's|/.*$||')
 fi
 
+echo "WEB_HOST:    ${WEB_HOST}"
+echo "MachineIp:   ${MachineIp}"
+echo "MYSQL_HOST:  ${MYSQL_HOST}"
+echo "TARS_TOKEN:  ${TARS_TOKEN}"
+
 mkdir -p /usr/local/app/tars/
 mkdir -p /usr/local/app/tars/tarsnode
 
@@ -57,11 +62,12 @@ do
 			cat /usr/local/app/tars/tarsnode/conf/tars.tarsnode.config.conf 
 			echo "install tarsnode succ, check tarsnode alive"
 
-			while [ 1 ]
-			do
-				sleep 3
-				/usr/local/app/tars/tarsnode/util/check.sh
-			done
+			/usr/local/app/tars/tarsnode/util/check.sh
+
+			sleep 1
+
+			/root/autotest/docker/run-test.sh ${MYSQL_HOST} 3306 root 123456 ${WEB_HOST} ${MachineIp} ${TARS_TOKEN}
+			exit 0
 		fi
 
 	fi
