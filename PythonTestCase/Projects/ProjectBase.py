@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # coding: utf-8
 from abc import ABCMeta, abstractmethod
 import os
@@ -11,6 +12,9 @@ SERVANT_ACTIVATING_SECONDS = 30
 
 # Project Base Class
 class Project(metaclass=ABCMeta):
+    _app = 'Demo'
+    _language = 'Base'
+
     def __init__(self, web_url, web_token):
         """The base Class of projects test case
         arguments
@@ -23,9 +27,9 @@ class Project(metaclass=ABCMeta):
             raise Exception('web_token is missing')
         self._web_url = web_url
         self._web_token = web_token
-        self._total_test_cnt = 0
-        self._succeed_tests = []
-        self._failed_tests = []
+        self.total_test_cnt = 0
+        self.succeed_tests = []
+        self.failed_tests = []
 
     @abstractmethod
     def publish(self):
@@ -69,13 +73,13 @@ class Project(metaclass=ABCMeta):
             "Content-Type": "multipart/form-data",
         }
         url = "{0}/api/upload_and_publish".format(self._web_url)
-        result = requests.post(url=url, data=data, headers=headers, files=files)
+        resp = requests.post(url=url, data=data, headers=headers, files=files)
         # TODO Deploy result check
-        print(result)
+        if resp.ok is not True:
+            raise Exception("{0}: Deploy failed: {1}".format(self._language, str(resp.content())))
         time.sleep(SERVANT_ACTIVATING_SECONDS)
 
-    @staticmethod
-    def _get_pkg_fname(pkg_dir, pkg_name_prefix, ext_len):
+    def _get_pkg_fname(self, pkg_dir, pkg_name_prefix, ext_len):
         pkg_name = ''
         with os.scandir(pkg_dir) as src_components:
             for src_component in src_components:
@@ -83,7 +87,7 @@ class Project(metaclass=ABCMeta):
                     pkg_name = src_component.name
         # pkg_name_prefix_timestamps.tar.gz len(.tar.gz) = 7
         if len(pkg_name) < len(pkg_name_prefix) + ext_len:
-            raise Exception('Deploy package for {0} cannot be found.'.format(pkg_name_prefix))
+            raise Exception('{0}: Deploy package for {1} cannot be found.'.format(self._language, pkg_name_prefix))
         pkg_fname = os.path.join(pkg_dir, pkg_name)
         return pkg_fname, pkg_name
 
@@ -100,11 +104,18 @@ class Project(metaclass=ABCMeta):
         print("\033[34m{0} \033[0m".format(content))
 
     def _ping_http(self, test_case):
-        self._total_test_cnt += 1
+        self.total_test_cnt += 1
         result = requests.get(test_case.format(self._web_url))
         if result != 'pong':
-            self._failed_tests.append(test_case)
-            self._print_err("request {0} failed".format(test_case))
+            self.failed_tests.append(test_case)
+            self._print_err("{0}: Request {1} failed".format(self._language, test_case))
         else:
-            self._succeed_tests.append(test_case)
-            self._print_succ("request {0} succeed".format(test_case))
+            self.succeed_tests.append(test_case)
+            self._print_succ("{0}: Request {1} succeed".format(self._language, test_case))
+    
+    def report(self):
+        self._print_info("{0}: Total Cases Count: {1}".format(self._language, self.total_test_cnt))
+        self._print_succ("{0}: Succeed Cases Count: {1}".format(self._language, len(self.succeed_tests)))
+        self._print_succ("{0}: Succeed Cases: {1}".format(self._language, ", ".join(self.succeed_tests)))
+        self._print_err("{0}: Failed Cases Count: {1}".format(self._language, len(self.failed_tests)))
+        self._print_err("{0}: Failed Cases: {1}".format(self._language, ", ".join(self.failed_tests)))

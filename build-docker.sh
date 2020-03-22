@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build docker -t tars-demo
+docker build . -t tars-demo

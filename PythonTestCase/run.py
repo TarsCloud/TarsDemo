@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/python3
 # coding: utf-8
 
 from Projects.PHP import PHPServant
@@ -76,6 +76,16 @@ if __name__ == '__main__':
     java_serv.report()
     cpp_serv.report()
 
+    failed_total = 0
+    failed_total += len(php_serv.failed_tests)
+    failed_total += len(golang_serv.failed_tests)
+    failed_total += len(nodejs_serv.failed_tests)
+    failed_total += len(java_serv.failed_tests)
+    failed_total += len(cpp_serv.failed_tests)
+
     t2 = time.time()
     duration = t2 - t1
     print("Duration: {0} seconds".format(duration))
+
+    if failed_total > 0:
+        exit(255)
