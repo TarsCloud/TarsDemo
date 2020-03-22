@@ -149,6 +149,24 @@ make tar
 make upload
 cd ../..
 
+# --------------------------------------php--------------------------------------
+cd PHPServer/PHPHttp/src
+composer install
+composer run-script deploy
+cd ../../PHPTars
+composer install
+composer run-script deploy
+cd ../../../
+
+# --------------------------------------golang--------------------------------------
+cd GoServer/GoHttp
+go mod vendor
+make tar
+cd ../GoTars
+go mod vendor
+make tar
+cd ../../
+
 # ===============================run test=======================================
 cd PythonTestCase/
 python3 run.py -u ${WEB_HOST} -t ${TOKEN}

@@ -23,7 +23,19 @@ docker run --net=host -itd -e MYSQL_HOST=${HOSTIP} -e MYSQL_ROOT_PASSWORD=12345 
         tarscloud/framework
 
 echo "docker build tars-demo"
-docker build . -f ./Dockerfile -t tars-demo 
+docker build . -f docker/Dockerfile -t tars-demo 
 
 echo "docker run tars-demo"
-docker run -it -eWEB_HOST=http://${HOSTIP}:3000 -eMYSQL_HOST=${HOSTIP} -eTARS_TOKEN=xxxx tars-demo 
+docker run -it \
+        -e WEB_HOST=http://${HOSTIP}:3000 \
+        -e MYSQL_HOST=${HOSTIP} \
+        -e TARS_TOKEN=xxxx \
+        -v ./CppServer:/root/ \
+        -v ./GoServer:/root/ \
+        -v ./JavaServer:/root/ \
+        -v ./NodejsServer:/root/ \
+        -v ./PhpServer:/root/ \
+        -v ./PythonTestCase:/root/ \
+        -v ./sql:/root/ \
+        -v ./docker:/root/autotest/ \
+        tars-demo 

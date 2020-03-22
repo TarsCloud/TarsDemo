@@ -108,17 +108,9 @@ RUN	yum clean all \
 # copy source
 # COPY install.sh /root/init/
 COPY entrypoint.sh /sbin/
-COPY ./CppServer /root/CppServer
-COPY ./GoServer /root/GoServer
-COPY ./JavaServer /root/JavaServer
-COPY ./NodejsServer /root/NodejsServer
-COPY ./PhpServer /root/PhpServer
-COPY ./PythonTestCase /root/PythonTestCase
-COPY ./sql /root/sql
-COPY run-test.sh /root/
 # ADD confs /root/confs
 
 # RUN chmod 755 /sbin/entrypoint.sh
 
-# ENTRYPOINT [ "/sbin/entrypoint.sh" ]
+ENTRYPOINT [ "/sbin/entrypoint.sh" ]
 
