@@ -8,6 +8,7 @@ import os
 class NodeJsServant(Project):
     _app = 'Demo'
     _language = 'NodeJs'
+    _http_port = 22004
 
     def publish(self):
         self._deploy_http()
@@ -23,6 +24,8 @@ class NodeJsServant(Project):
                 pkg_name_prefix='NodejsHttp',
                 pkg_ext='.tgz'
             )
+            self.total_test_cnt += 1
+            self.succeed_tests.append('Deploy Http')
         except Exception as e:
             self.total_test_cnt += 1
             self.failed_tests.append('Deploy Http')
@@ -38,6 +41,8 @@ class NodeJsServant(Project):
                 pkg_name_prefix='NodejsTars',
                 pkg_ext='.tgz'
             )
+            self.total_test_cnt += 1
+            self.succeed_tests.append('Deploy Tars')
         except Exception as e:
             self.total_test_cnt += 1
             self.failed_tests.append('Deploy Tars')

@@ -10,32 +10,42 @@ echo "docker pull mysql"
 docker pull mysql:5.6
 
 echo "docker run mysql"
-docker run -dit -p 3306:3306 -e MYSQL_ROOT_PASSWORD=12345 mysql:5.6 
+docker run -d \
+        -p 3306:3306 \
+        --net=tarsdemo \
+        --ip 172.35.0.200 \
+        -e MYSQL_ROOT_PASSWORD=12345 \
+        mysql:5.6 
 
 echo "docker pull tars framework"
 docker pull tarscloud/framework
 
 echo "docker run tars framework"
-docker run --net=host -itd -e MYSQL_HOST=${HOSTIP} -e MYSQL_ROOT_PASSWORD=12345 \
-        -eREBUILD=true -eINET=eth0 -eSLAVE=false \
-        -v/data/tars:/data/tars \
-        -v/etc/localtime:/etc/localtime \
+docker run --net=tarsdemo \
+        --rm \
+        -e MYSQL_HOST=172.35.0.200 \
+        -e MYSQL_ROOT_PASSWORD=12345 \
+        -e REBUILD=true \
+        -e INET=eth0 \
+        -e TARS_WEB_UPLOAD=true \
+        -e SLAVE=false \
+        -v /tmp/data/tars:/data/tars \
+        --ip 172.35.0.2 \
+        -p 3000:3000 \
+        -p 3001:3001 \
         tarscloud/framework
 
 echo "docker build tars-demo"
-docker build . -f docker/Dockerfile -t tars-demo 
-
+docker build docker -f docker/Dockerfile -t tars-demo 
+PRJ_DIR=$(cd ..; pwd)
 echo "docker run tars-demo"
-docker run -it \
-        -e WEB_HOST=http://${HOSTIP}:3000 \
-        -e MYSQL_HOST=${HOSTIP} \
+docker run --rm \
+        -e WEB_HOST=http://172.35.0.2:3000 \
+        -e MYSQL_HOST=172.35.0.200 \
+        -e INET=eth0 \
         -e TARS_TOKEN=xxxx \
-        -v ./CppServer:/root/ \
-        -v ./GoServer:/root/ \
-        -v ./JavaServer:/root/ \
-        -v ./NodejsServer:/root/ \
-        -v ./PhpServer:/root/ \
-        -v ./PythonTestCase:/root/ \
-        -v ./sql:/root/ \
-        -v ./docker:/root/autotest/ \
+        --net=tarsdemo \
+        --ip 172.35.0.10 \
+        -p "20000-20020":"20000-20020" \
+        -v "${PRJ_DIR}/TarsDemo":/root/TarsDemo \
         tars-demo 

@@ -7,26 +7,26 @@ import requests
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 # sleep specific time after service publishing to wait for service activating
-SERVANT_ACTIVATING_SECONDS = 30
+SERVANT_ACTIVATING_SECONDS = 3
 
 
 # Project Base Class
 class Project(metaclass=ABCMeta):
     _app = 'Demo'
     _language = 'Base'
+    _http_port = 80
 
-    def __init__(self, web_url, web_token):
+    def __init__(self, web_url, node_ip):
         """The base Class of projects test case
         arguments
             web_url : the url of tars framework web
-            web_token : the user token of tars framework web
+            node_ip : the ip of your tarsnode
         """
         if web_url is None:
             raise Exception('web_url is missing')
-        if web_token is None:
-            raise Exception('web_token is missing')
         self._web_url = web_url
-        self._web_token = web_token
+        self._node_ip = node_ip
+        self._node_http_url = "http://{0}:{1}".format(self._node_ip, self._http_port)
         self.total_test_cnt = 0
         self.succeed_tests = []
         self.failed_tests = []
@@ -54,6 +54,7 @@ class Project(metaclass=ABCMeta):
     def publish_and_test(self):
         self.publish()
         self.run_test()
+        return
 
     def _upload_and_publish(self, app_name, module_name, pkg_dir, pkg_name_prefix, pkg_ext):
         pkg_fname, pkg_name = self._get_pkg_fname(
@@ -61,19 +62,20 @@ class Project(metaclass=ABCMeta):
             pkg_name_prefix=pkg_name_prefix,
             ext_len=len(pkg_ext))
         self._print_info("Publishing {0}.{1}".format(app_name, module_name))
-        data = {
-            "application": app_name,
-            "module_name": module_name,
-            "comment": "developer-auto-upload",
-            "task_id": time.time(),
-            "ticket" : self._web_token,
+        payload = {
+            'application': app_name,
+            'module_name': module_name,
+            'comment': 'developer-auto-upload',
+            'task_id': time.time()
         }
-        files = {'suse': (pkg_name, open(pkg_fname, "rb"))}
+        files = {'suse': (pkg_name, open(pkg_fname,'rb'))}
         headers = {
-            "Content-Type": "multipart/form-data",
+            # 'Content-Type': 'multipart/form-data',
+            # 'Cookie': 'dcache=true'
         }
-        url = "{0}/api/upload_and_publish".format(self._web_url)
-        resp = requests.post(url=url, data=data, headers=headers, files=files)
+        url = "{0}/pages/server/api/upload_and_publish".format(self._web_url)
+        resp = requests.request("POST", url, headers=headers, data = payload, files = files)
+        self._print_info("{0}: resp:\n{1}".format(self._language, resp.text))
         # TODO Deploy result check
         if resp.ok is not True:
             raise Exception("{0}: Deploy failed: {1}".format(self._language, str(resp.content())))
@@ -105,13 +107,16 @@ class Project(metaclass=ABCMeta):
 
     def _ping_http(self, test_case):
         self.total_test_cnt += 1
-        result = requests.get(test_case.format(self._web_url))
-        if result != 'pong':
-            self.failed_tests.append(test_case)
-            self._print_err("{0}: Request {1} failed".format(self._language, test_case))
-        else:
+        self._print_info("{0}: {1}".format(self._language, test_case.format(self._node_http_url)))
+        resp = requests.get(test_case.format(self._node_http_url))
+        self._print_info("{0}: {1}".format(self._language, resp.text))
+        if resp.text == 'pong' and resp.ok is True:
             self.succeed_tests.append(test_case)
             self._print_succ("{0}: Request {1} succeed".format(self._language, test_case))
+        else:
+            self.failed_tests.append(test_case)
+            self._print_err("{0}: Request {1} failed".format(self._language, test_case))
+            
     
     def report(self):
         self._print_info("{0}: Total Cases Count: {1}".format(self._language, self.total_test_cnt))

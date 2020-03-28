@@ -10,11 +10,12 @@ ENV JAVA_HOME /usr/java/jdk-10.0.2
 
 COPY centos7_base.repo /etc/yum.repos.d/
 
-RUN	yum update -y \
-	&& yum install -y mysql-devel \	
+RUN	rpm -ivh https://repo.mysql.com//mysql57-community-release-el7-11.noarch.rpm\
+	&& yum update -y \
+	&& yum install -y mysql-devel mysql-community-client.x86_64 \	
 	&& yum install -y wget epel-release \
 	&& yum install -y yum-utils \
-	&& yum -y install psmisc net-tools wget unzip telnet zlib-devel git gcc gcc-c++ autoconf pcre-devel \
+	&& yum -y install psmisc net-tools wget unzip telnet zlib-devel git gcc gcc-c++ autoconf pcre-devel openssl \
 	&& yum -y install golang make iproute which glibc-devel ncurses-devel openssl-devel \
 	&& yum -y install kde-l10n-Chinese glibc-common \
 	&& yum -y install centos-release-scl \

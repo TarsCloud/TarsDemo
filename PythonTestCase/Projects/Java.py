@@ -8,6 +8,7 @@ import os
 class JavaServant(Project):
     _app = 'Demo'
     _language = 'Java'
+    _http_port = 22002
 
     def publish(self):
         self._deploy_http()
@@ -23,6 +24,8 @@ class JavaServant(Project):
                 pkg_name_prefix='JavaHttp',
                 pkg_ext='.tgz'
             )
+            self.total_test_cnt += 1
+            self.succeed_tests.append('Deploy Http')
         except Exception as e:
             self.total_test_cnt += 1
             self.failed_tests.append('Deploy Http')
@@ -38,6 +41,8 @@ class JavaServant(Project):
                 pkg_name_prefix='JavaTars',
                 pkg_ext='.tgz'
             )
+            self.total_test_cnt += 1
+            self.succeed_tests.append('Deploy Tars')
         except Exception as e:
             self.total_test_cnt += 1
             self.failed_tests.append('Deploy Tars')

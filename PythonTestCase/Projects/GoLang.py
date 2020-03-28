@@ -8,6 +8,7 @@ import os
 class GoLangServant(Project):
     _app = 'Demo'
     _language = 'Golang'
+    _http_port = 22006
 
     def publish(self):
         self._deploy_http()
@@ -23,6 +24,8 @@ class GoLangServant(Project):
                 pkg_name_prefix='GoHttp',
                 pkg_ext='.tgz'
             )
+            self.total_test_cnt += 1
+            self.succeed_tests.append('Deploy Http')
         except Exception as e:
             self.total_test_cnt += 1
             self.failed_tests.append('Deploy Http')
@@ -38,6 +41,8 @@ class GoLangServant(Project):
                 pkg_name_prefix='GoTars',
                 pkg_ext='.tgz'
             )
+            self.total_test_cnt += 1
+            self.succeed_tests.append('Deploy Tars')
         except Exception as e:
             self.total_test_cnt += 1
             self.failed_tests.append('Deploy Tars')

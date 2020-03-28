@@ -8,6 +8,7 @@ import os
 class CppServant(Project):
     _app = 'Demo'
     _language = 'Cpp'
+    _http_port = 22000
 
     def publish(self):
         self._deploy_http()
@@ -23,6 +24,8 @@ class CppServant(Project):
                 pkg_name_prefix='CppHttp',
                 pkg_ext='.tgz'
             )
+            self.total_test_cnt += 1
+            self.succeed_tests.append('Deploy Http')
         except Exception as e:
             self.total_test_cnt += 1
             self.failed_tests.append('Deploy Http')
@@ -38,6 +41,8 @@ class CppServant(Project):
                 pkg_name_prefix='CppTars',
                 pkg_ext='.tgz'
             )
+            self.total_test_cnt += 1
+            self.succeed_tests.append('Deploy Tars')
         except Exception as e:
             self.total_test_cnt += 1
             self.failed_tests.append('Deploy Tars')

@@ -62,10 +62,10 @@ function LOG_INFO()
 }
 
 
-if (( $# < 7 ))
+if (( $# < 6 ))
 then
     echo $#
-    echo "$0 MYSQL_HOST MYSQL_PORT MYSQL_USER MYSQL_PASS WEB_HOST NODE_IP TOKEN";
+    echo "$0 MYSQL_HOST MYSQL_PORT MYSQL_USER MYSQL_PASS WEB_HOST NODE_IP";
     exit 1
 fi
 
@@ -75,7 +75,6 @@ MYSQL_USER=$3
 MYSQL_PASS=$4
 WEB_HOST=$5
 NODE_IP=$6
-TOKEN=$7
 
 #输出配置信息
 LOG_DEBUG "===>print config info >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
@@ -86,7 +85,6 @@ LOG_DEBUG "MYSQL_USER:    "$MYSQL_USER
 LOG_DEBUG "MYSQL_PASS:    "$MYSQL_PASS
 LOG_DEBUG "WEB_HOST:      "$WEB_HOST
 LOG_DEBUG "NODE_IP:       "$NODE_IP
-LOG_DEBUG "TOKEN:         "${TOKEN}
 LOG_DEBUG "===<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< print config info finish.\n";
 
 #-------------------------------------------
@@ -109,13 +107,11 @@ else
 fi
 
 #-------------------------------------------
-TEST_PATH=$(cd $(dirname $0); pwd)
-
-cd ${TEST_PATH}
 
 #exec sql
 function exec_mysql_sql()
 {
+	LOG_DEBUG "mysql -h${MYSQL_HOST} -u${MYSQL_USER} -p${MYSQL_PASS} -P${MYSQL_PORT} --default-character-set=utf8 -D$1 < $2"
     mysql -h${MYSQL_HOST} -u${MYSQL_USER} -p${MYSQL_PASS} -P${MYSQL_PORT} --default-character-set=utf8 -D$1 < $2
 
     ret=$?
@@ -123,6 +119,10 @@ function exec_mysql_sql()
     return $ret
 }
 
+cd ../
+TEST_PATH=$(cd $(dirname $0); pwd)
+
+cd ${TEST_PATH}
 cp -rf sql sql.tmp
 
 #mac
@@ -141,32 +141,32 @@ rm -rf sql.tmp
 pwd
 ls 
 # --------------------------------------cpp--------------------------------------
-mkdir CppServer/build
-cd CppServer/build
-cmake .. -DTARS_WEB_HOST=${WEB_HOST} -DTARS_TOKEN=${TOKEN}
-make -j4
-make tar
-make upload
-cd ../..
+# mkdir CppServer/build
+# cd CppServer/build
+# cmake .. -DTARS_WEB_HOST=${WEB_HOST} -DTARS_TOKEN=${TOKEN}
+# make -j4
+# make tar
+# make upload
+# cd ../..
 
 # --------------------------------------php--------------------------------------
-cd PHPServer/PHPHttp/src
+cd PhpServer/PHPHttp/src
 composer install
 composer run-script deploy
-cd ../../PHPTars
+cd ../../PHPTars/src
 composer install
 composer run-script deploy
 cd ../../../
 
 # --------------------------------------golang--------------------------------------
-cd GoServer/GoHttp
-go mod vendor
-make tar
-cd ../GoTars
-go mod vendor
-make tar
-cd ../../
+# cd GoServer/GoHttp
+# go mod vendor
+# make tar
+# cd ../GoTars
+# go mod vendor
+# make tar
+# cd ../../
 
 # ===============================run test=======================================
 cd PythonTestCase/
-python3 run.py -u ${WEB_HOST} -t ${TOKEN}
+python3 run.py -u ${WEB_HOST} -n ${NODE_IP}
