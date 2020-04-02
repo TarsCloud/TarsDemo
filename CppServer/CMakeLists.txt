@@ -24,6 +24,9 @@ link_directories(/usr/local/tars/cpp/thirdparty/lib)
 
 #include_directories(/home/tarsprotol/App/OtherServer)
 
-add_subdirectory(src)
+include_directories(CppTars)
+
+add_subdirectory(CppTars)
+add_subdirectory(CppHttp)
 
 #target_link_libraries(mysqlclient ssl crypto nghttp2-static)

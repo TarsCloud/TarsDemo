@@ -62,18 +62,14 @@ do
 			cat /usr/local/app/tars/tarsnode/conf/tars.tarsnode.config.conf 
 			echo "install tarsnode succ, check tarsnode alive"
 
-			while [ 1 ]
-			do
-				sleep 3
-				/usr/local/app/tars/tarsnode/util/check.sh
-			done
+			/usr/local/app/tars/tarsnode/util/check.sh
 
-			# /root/autotest/docker/run-test.sh ${MYSQL_HOST} 3306 root 123456 ${WEB_HOST} ${MachineIp} ${TARS_TOKEN}
-			# exit 0
+			/root/autotest/docker/run-test.sh ${MYSQL_HOST} 3306 root 123456 ${WEB_HOST} ${MachineIp} ${TARS_TOKEN}
+			exit 0
 		fi
 
 	fi
 
-	# echo "install tarsnode failed, retry 3 seconds later..."
-	# sleep 3
+	echo "install tarsnode failed, retry 3 seconds later..."
+	sleep 3
 done
