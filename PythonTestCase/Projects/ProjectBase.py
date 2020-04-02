@@ -108,15 +108,18 @@ class Project(metaclass=ABCMeta):
     def _ping_http(self, test_case):
         self.total_test_cnt += 1
         self._print_info("{0}: {1}".format(self._language, test_case.format(self._node_http_url)))
-        resp = requests.get(test_case.format(self._node_http_url))
-        self._print_info("{0}: {1}".format(self._language, resp.text))
-        if resp.text == 'pong' and resp.ok is True:
-            self.succeed_tests.append(test_case)
-            self._print_succ("{0}: Request {1} succeed".format(self._language, test_case))
-        else:
+        try:
+            resp = requests.get(test_case.format(self._node_http_url))
+            self._print_info("{0}: {1}".format(self._language, resp.text))
+            if resp.text == 'pong' and resp.ok is True:
+                self.succeed_tests.append(test_case)
+                self._print_succ("{0}: Request {1} succeed".format(self._language, test_case))
+            else:
+                self.failed_tests.append(test_case)
+                self._print_err("{0}: Request {1} failed".format(self._language, test_case))
+        except BaseException:
             self.failed_tests.append(test_case)
-            self._print_err("{0}: Request {1} failed".format(self._language, test_case))
-            
+            self._print_err("{0}: Request {1} exception raised".format(self._language, test_case))
     
     def report(self):
         self._print_info("{0}: Total Cases Count: {1}".format(self._language, self.total_test_cnt))

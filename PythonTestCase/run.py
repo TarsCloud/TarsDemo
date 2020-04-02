@@ -17,7 +17,6 @@ def get_web_url_and_token():
     parser = optparse.OptionParser(usage=usage)
     parser.add_option('-u', '--url', dest='url', type='string', help='the url of framework web', default='')
     parser.add_option('-n', '--nodeip', dest='nodeip', type='string', help='the ip of your application node')
-    parser.add_option('-t', '--target', dest='target', type='string', help='the target application to test')
     options, _ = parser.parse_args()
     if options.url is None:
         parser.print_help()
