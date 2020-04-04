@@ -27,22 +27,31 @@ echo "MachineIp:   ${MachineIp}"
 echo "MYSQL_HOST:  ${MYSQL_HOST}"
 echo "TARS_TOKEN:  ${TARS_TOKEN}"
 
-mkdir -p /usr/local/app/tars/
-mkdir -p /usr/local/app/tars/tarsnode
+#mkdir -p /usr/local/app/tars/
+#mkdir -p /usr/local/app/tars/tarsnode
 
-mkdir -p /data/tars/app_log
-mkdir -p /data/tars/tarsnode-data
+#mkdir -p /data/tars/app_log
+#mkdir -p /data/tars/tarsnode-data
 
-ln -s /data/tars/app_log /usr/local/app/tars/app_log 
-ln -s /data/tars/tarsnode-data /usr/local/app/tars/tarsnode/data
+#ln -s /data/tars/app_log /usr/local/app/tars/app_log 
+#ln -s /data/tars/tarsnode-data /usr/local/app/tars/tarsnode/data
 
 trap 'exit' SIGTERM SIGINT
+
+TEST_PATH=$(cd $(dirname $0); pwd)
+
 
 while [ 1 ]
 do
 	rm -rf get_tarsnode.sh
 
 	wget -O get_tarsnode.sh "${WEB_HOST}/get_tarsnode?ip=${MachineIp}&runuser=root"
+       
+        if [ $? != 0 ]; then
+           echo "try get tarsnode..."
+           sleep 5
+           continue
+        fi 
 
 	sleep 1
 
@@ -55,18 +64,18 @@ do
 
 		./get_tarsnode.sh
 
-		if [ -f "/usr/local/app/tars/tarsnode/util/check.sh" ]; then
+		#echo "tarsnode.conf: --------------------------------------------------------"
 
-			echo "tarsnode.conf: --------------------------------------------------------"
+		#cat /usr/local/app/tars/tarsnode/conf/tars.tarsnode.config.conf 
+		echo "install tarsnode succ, check tarsnode alive"
 
-			cat /usr/local/app/tars/tarsnode/conf/tars.tarsnode.config.conf 
-			echo "install tarsnode succ, check tarsnode alive"
+		/usr/local/app/tars/tarsnode/util/start.sh
 
-			/usr/local/app/tars/tarsnode/util/check.sh
+                cd ${TEST_PATH}                
 
-			/root/autotest/docker/run-test.sh ${MYSQL_HOST} 3306 root 123456 ${WEB_HOST} ${MachineIp} ${TARS_TOKEN}
-			exit 0
-		fi
+	        ./run-test.sh ${MYSQL_HOST} 3306 root 12345 ${WEB_HOST} ${MachineIp} ${TARS_TOKEN}
+
+	        exit 0
 
 	fi
 

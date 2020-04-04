@@ -2,33 +2,30 @@
 .idea/*
 
 # cpp
-CppServer/build
-
+Servers/CppServer/build
 
 # golang
-./GoServer/GoHttp/vendor/*
-./GoServer/GoHttp/go.sum
-./GoServer/GoHttp/*.tgz
-./GoServer/GoTars/vendor/*
-./GoServer/GoTars/go.sum
-./GoServer/GoTars/*.tgz
-
+Servers/GoServer/GoHttp/vendor/*
+Servers/GoServer/GoHttp/go.sum
+Servers/GoServer/GoHttp/*.tgz
+Servers/GoServer/GoTars/vendor/*
+Servers/GoServer/GoTars/go.sum
+Servers/GoServer/GoTars/*.tgz
 
 # php
-./PhpServer/PHPHttp/.idea/*
-./PhpServer/PHPHttp/src/vendor/*
-./PhpServer/PHPHttp/src/composer.lock
-./PhpServer/PHPHttp/src/servant/*
-./PhpServer/PHPHttp/src/*.tar.gz
-./PhpServer/PHPTars/.idea/*
-./PhpServer/PHPTars/src/vendor/*
-./PhpServer/PHPTars/src/composer.lock
-./PhpServer/PHPTars/src/servant/*
-./PhpServer/PHPTars/src/*.tar.gz
-
+Servers/PhpServer/PHPHttp/.idea/*
+Servers/PhpServer/PHPHttp/src/vendor/*
+Servers/PhpServer/PHPHttp/src/composer.lock
+Servers/PhpServer/PHPHttp/src/servant/*
+Servers/PhpServer/PHPHttp/src/*.tar.gz
+Servers/PhpServer/PHPTars/.idea/*
+Servers/PhpServer/PHPTars/src/vendor/*
+Servers/PhpServer/PHPTars/src/composer.lock
+Servers/PhpServer/PHPTars/src/servant/*
+Servers/PhpServer/PHPTars/src/*.tar.gz
 
 # nodejs
-./NodejsServer/NodejsHttp/package-lock.json
-./NodejsServer/NodejsHttp/node_modules/*
-./NodejsServer/NodejsTars/package-lock.json
-./NodejsServer/NodejsTars/node_modules/*
+Servers/NodejsServer/NodejsHttp/package-lock.json
+Servers/NodejsServer/NodejsHttp/node_modules/*
+Servers/NodejsServer/NodejsTars/package-lock.json
+Servers/NodejsServer/NodejsTars/node_modules/*

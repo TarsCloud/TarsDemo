@@ -1,6 +1,0 @@
-module Demo{
-interface Hello{
-
-    string Ping();
-};
-};
