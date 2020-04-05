@@ -78,6 +78,7 @@ class Project(metaclass=ABCMeta):
         self._print_info("{0}: resp:\n{1}".format(self._language, resp.text))
         # TODO Deploy result check
         if resp.ok is not True:
+            self._print_err("{0}: Deploy failed: {1}".format(self._language, str(resp.content())))
             raise Exception("{0}: Deploy failed: {1}".format(self._language, str(resp.content())))
         time.sleep(SERVANT_ACTIVATING_SECONDS)
 
@@ -89,6 +90,7 @@ class Project(metaclass=ABCMeta):
                     pkg_name = src_component.name
         # pkg_name_prefix_timestamps.tar.gz len(.tar.gz) = 7
         if len(pkg_name) < len(pkg_name_prefix) + ext_len:
+            self._print_err('{0}: Deploy package for {1} cannot be found.'.format(self._language, pkg_name_prefix))
             raise Exception('{0}: Deploy package for {1} cannot be found.'.format(self._language, pkg_name_prefix))
         pkg_fname = os.path.join(pkg_dir, pkg_name)
         return pkg_fname, pkg_name
