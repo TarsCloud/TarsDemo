@@ -11,11 +11,11 @@ class PHPServant(Project):
     _http_port = 22008
 
     def publish(self):
-        self._deploy_http()
         self._deploy_tars()
+        self._deploy_http()
 
     def _deploy_http(self):
-        prj_dir = os.path.join(PROJECT_ROOT, 'PhpServer/PHPHttp')
+        prj_dir = os.path.join(PROJECT_ROOT, 'Servers/PhpServer/PHPHttp')
         pkg_dir = os.path.join(prj_dir, 'src')
         try:
             self._upload_and_publish(
@@ -34,7 +34,7 @@ class PHPServant(Project):
             self._print_err("{0}: Http deploy failed.".format(self._language))
 
     def _deploy_tars(self):
-        prj_dir = os.path.join(PROJECT_ROOT, 'PhpServer/PHPTars')
+        prj_dir = os.path.join(PROJECT_ROOT, 'Servers/PhpServer/PHPTars')
         pkg_dir = os.path.join(prj_dir, 'src')
         try:
             self._upload_and_publish(

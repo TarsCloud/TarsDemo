@@ -12,12 +12,16 @@ RUN mkdir -p /root/Tars && cd /root/Tars \
     && cd build \
     && cmake .. && make && make install
 
+RUN cd /usr/local/go/src/github.com/TarsCloud/TarsGo/tars/tools/tars2go \
+    && go build . \
+    && ln -s /usr/local/go/src/github.com/TarsCloud/TarsGo/tars/tools/tars2go /usr/local/bin/tars2go
+
 RUN rm -rf /root/Tars \
     && yum clean all && rm -rf /var/cache/yum
 
 RUN mkdir -p /root/autotest
 
-COPY entrypoint.sh run-test.sh /root/autotest/
+COPY docker/entrypoint.sh docker/run-test.sh /root/autotest/
 COPY PythonTestCase /root/autotest/PythonTestCase
 COPY Servers /root/autotest/Servers
 COPY sql /root/autotest/sql

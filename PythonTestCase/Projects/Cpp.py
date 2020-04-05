@@ -11,11 +11,11 @@ class CppServant(Project):
     _http_port = 22000
 
     def publish(self):
-        self._deploy_http()
         self._deploy_tars()
+        self._deploy_http()
 
     def _deploy_http(self):
-        prj_dir = os.path.join(PROJECT_ROOT, 'CppServer/CppHttp')
+        prj_dir = os.path.join(PROJECT_ROOT, 'Servers/CppServer/CppHttp')
         try:
             self._upload_and_publish(
                 app_name=self._app,
@@ -32,7 +32,7 @@ class CppServant(Project):
             self._print_err("{0}: Http deploy failed.".format(self._language))
 
     def _deploy_tars(self):
-        prj_dir = os.path.join(PROJECT_ROOT, 'CppServer/CppTars')
+        prj_dir = os.path.join(PROJECT_ROOT, 'Servers/CppServer/CppTars')
         try:
             self._upload_and_publish(
                 app_name=self._app,

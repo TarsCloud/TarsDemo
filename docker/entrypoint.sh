@@ -25,7 +25,7 @@ fi
 echo "WEB_HOST:    ${WEB_HOST}"
 echo "MachineIp:   ${MachineIp}"
 echo "MYSQL_HOST:  ${MYSQL_HOST}"
-echo "TARS_TOKEN:  ${TARS_TOKEN}"
+echo "WEB_TOKEN:   ${WEB_TOKEN}"
 
 #mkdir -p /usr/local/app/tars/
 #mkdir -p /usr/local/app/tars/tarsnode
@@ -71,11 +71,15 @@ do
 
 		/usr/local/app/tars/tarsnode/util/start.sh
 
-                cd ${TEST_PATH}                
+        cd ${TEST_PATH}                
 
-	        ./run-test.sh ${MYSQL_HOST} 3306 root 12345 ${WEB_HOST} ${MachineIp} ${TARS_TOKEN}
+	    ./run-test.sh ${MYSQL_HOST} 3306 root 12345 ${WEB_HOST} ${MachineIp} ${WEB_TOKEN}
 
-	        exit 0
+		while [ 1 ]
+		do
+			sleep 3
+		done
+	    exit 0
 
 	fi
 

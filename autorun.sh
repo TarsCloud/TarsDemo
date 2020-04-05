@@ -23,7 +23,8 @@ docker pull mysql:5.6
 
 echo "docker run mysql"
 docker run -d \
-        --name tars-mysql \
+        --rm \
+        --name mysql \
         -p 3306:3306 \
         --net=tarsdemo \
         --ip 172.35.0.200 \
@@ -36,6 +37,7 @@ docker pull tarscloud/framework:$FRAMEWORK_TAG
 echo "docker run tars framework"
 docker run -d --net=tarsdemo \
         --rm \
+        --name framework \
         -e MYSQL_HOST=172.35.0.200 \
         -e MYSQL_ROOT_PASSWORD=12345 \
         -e REBUILD=true \
@@ -50,26 +52,24 @@ docker run -d --net=tarsdemo \
 
 if [ "$REBUILD" == "true" ]; then
         echo "docker build tars-demo"
-        docker build . -t tars-demo:$TARSDEMO_TAG
+        docker build -f docker/Dockerfile -t tarscloud/tarsdemo:$TARSDEMO_TAG .
 
         echo "docker run tars-demo"
         docker run --rm \
+                --name node \
                 -e WEB_HOST=http://172.35.0.2:3000 \
                 -e MYSQL_HOST=172.35.0.200 \
                 --net=tarsdemo \
                 --ip 172.35.0.10 \
                 -p "20000-20020":"20000-20020" \
-                -v "${PRJ_DIR}/TarsDemo":/root/TarsDemo \
                 tarscloud/tarsdemo:$TARSDEMO_TAG
-
-
 else
         docker run --rm \
+                --name node \
                 -e WEB_HOST=http://172.35.0.2:3000 \
                 -e MYSQL_HOST=172.35.0.200 \
                 --net=tarsdemo \
                 --ip 172.35.0.10 \
                 -p "20000-20020":"20000-20020" \
                 tarscloud/tarsdemo:$TARSDEMO_TAG
-
 fi

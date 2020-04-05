@@ -116,7 +116,7 @@ exec_mysql_sql db_tars sql.tmp/tars-demo.sql
 rm -rf sql.tmp
 
 # ===============================build test projects=============================
-
+LOG_DEBUG "Building CPP"
 SERVERS_PATH=${TEST_PATH}/Servers
 # --------------------------------------cpp--------------------------------------
 rm -rf ${SERVERS_PATH}/CppServer/build
@@ -129,6 +129,7 @@ make upload
 
 #sleep 20000000
 # --------------------------------------php--------------------------------------
+LOG_DEBUG "Building PHP"
 cd ${SERVERS_PATH}/PhpServer/PHPHttp/src
 composer install
 composer run-script deploy
@@ -137,13 +138,13 @@ composer install
 composer run-script deploy
 
 # --------------------------------------golang--------------------------------------
-# cd GoServer/GoHttp
-# go mod vendor
-# make tar
-# cd ../GoTars
-# go mod vendor
-# make tar
-# cd ../../
+LOG_DEBUG "Building GoLang"
+cd ${SERVERS_PATH}/GoServer/GoHttp
+go mod vendor
+make tar
+cd ${SERVERS_PATH}/GoServer/GoTars
+go mod vendor
+make tar
 
 # ===============================run test=======================================
 cd ${TEST_PATH}/PythonTestCase/

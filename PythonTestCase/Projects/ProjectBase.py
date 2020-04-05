@@ -7,7 +7,7 @@ import requests
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 # sleep specific time after service publishing to wait for service activating
-SERVANT_ACTIVATING_SECONDS = 3
+SERVANT_ACTIVATING_SECONDS = 30
 
 
 # Project Base Class

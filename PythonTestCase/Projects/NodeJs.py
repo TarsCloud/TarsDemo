@@ -11,11 +11,11 @@ class NodeJsServant(Project):
     _http_port = 22004
 
     def publish(self):
-        self._deploy_http()
         self._deploy_tars()
+        self._deploy_http()
 
     def _deploy_http(self):
-        prj_dir = os.path.join(PROJECT_ROOT, 'NodejsServer/NodejsHttp')
+        prj_dir = os.path.join(PROJECT_ROOT, 'Servers/NodejsServer/NodejsHttp')
         try:
             self._upload_and_publish(
                 app_name=self._app,
@@ -32,7 +32,7 @@ class NodeJsServant(Project):
             self._print_err("{0}: Http deploy failed.".format(self._language))
 
     def _deploy_tars(self):
-        prj_dir = os.path.join(PROJECT_ROOT, 'NodejsServer/NodejsTars')
+        prj_dir = os.path.join(PROJECT_ROOT, 'Servers/NodejsServer/NodejsTars')
         try:
             self._upload_and_publish(
                 app_name=self._app,
