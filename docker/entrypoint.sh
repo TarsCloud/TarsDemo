@@ -75,12 +75,9 @@ do
 
 	    ./run-test.sh ${MYSQL_HOST} 3306 root 12345 ${WEB_HOST} ${MachineIp} ${WEB_TOKEN}
 
-		while [ 1 ]
-		do
-			sleep 3
-		done
-	    exit 0
+		EXIT_CODE=$(echo $?)
 
+	    exit $EXIT_CODE
 	fi
 
 	echo "install tarsnode failed, retry 3 seconds later..."
