@@ -60,7 +60,7 @@ class Project(metaclass=ABCMeta):
         pkg_fname, pkg_name = self._get_pkg_fname(
             pkg_dir=pkg_dir,
             pkg_name_prefix=pkg_name_prefix,
-            ext_len=len(pkg_ext))
+            pkg_ext=pkg_ext)
         self._print_info("Publishing {0}.{1}".format(app_name, module_name))
         payload = {
             'application': app_name,
@@ -82,11 +82,12 @@ class Project(metaclass=ABCMeta):
             raise Exception("{0}: Deploy failed: {1}".format(self._language, str(resp.content())))
         time.sleep(SERVANT_ACTIVATING_SECONDS)
 
-    def _get_pkg_fname(self, pkg_dir, pkg_name_prefix, ext_len):
+    def _get_pkg_fname(self, pkg_dir, pkg_name_prefix, pkg_ext):
         pkg_name = ''
+        ext_len = len(pkg_ext)
         with os.scandir(pkg_dir) as src_components:
             for src_component in src_components:
-                if src_component.name.startswith(pkg_name_prefix):
+                if src_component.name.startswith(pkg_name_prefix) and src_component.name.endswith(pkg_ext):
                     pkg_name = src_component.name
         # pkg_name_prefix_timestamps.tar.gz len(.tar.gz) = 7
         if len(pkg_name) < len(pkg_name_prefix) + ext_len:
