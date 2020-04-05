@@ -55,8 +55,8 @@ url, nodeip = get_web_url_and_token()
 # initialize languages test cases
 php_serv = PHPServant(url, nodeip)
 golang_serv = GoLangServant(url, nodeip)
-# nodejs_serv = NodeJsServant(url, token)
-# java_serv = JavaServant(url, token)
+# nodejs_serv = NodeJsServant(url, nodeip)
+# java_serv = JavaServant(url, nodeip)
 cpp_serv = CppServant(url, nodeip)
 
 t1 = time.time()

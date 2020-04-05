@@ -3,7 +3,10 @@ FROM tarscloud/tars-env-full
 RUN yum -y install mysql epel-release \
     && yum -y install python36 \
     && pip3 install requests \
-    && yum install -y flex bison
+    && yum install -y flex bison \
+    && yum install -y http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm \
+    && yum install -y git \
+    && yum update -y git
 
 RUN mkdir -p /root/Tars && cd /root/Tars \
     && git clone https://github.com/TarsCloud/TarsCpp cpp --recursive \
