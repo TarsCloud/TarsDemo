@@ -11,8 +11,9 @@ class CppServant(Project):
     _http_port = 22000
 
     def publish(self):
-        self._deploy_tars()
-        self._deploy_http()
+        # self._deploy_tars()
+        # self._deploy_http()
+        pass
 
     def _deploy_http(self):
         prj_dir = os.path.join(PROJECT_ROOT, 'Servers/CppServer/CppHttp')

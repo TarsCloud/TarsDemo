@@ -14,7 +14,7 @@ RUN mkdir -p /root/Tars && cd /root/Tars \
 
 RUN cd /usr/local/go/src/github.com/TarsCloud/TarsGo/tars/tools/tars2go \
     && go build . \
-    && ln -s /usr/local/go/src/github.com/TarsCloud/TarsGo/tars/tools/tars2go /usr/local/bin/tars2go
+    && ln -s /usr/local/go/src/github.com/TarsCloud/TarsGo/tars/tools/tars2go /usr/local/go/bin/tars2go
 
 RUN rm -rf /root/Tars \
     && yum clean all && rm -rf /var/cache/yum
