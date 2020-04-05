@@ -2,12 +2,12 @@ name: framework-nightly-test
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: 0 0 * * *
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: test framework nightly build
-      run: |
-        ./autorun.sh nightly latest true
+      - name: test framework nightly build
+        run: |
+          ./autorun.sh nightly latest true
