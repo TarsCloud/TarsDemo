@@ -18,8 +18,8 @@ echo HOSTIP:${HOSTIP}
 
 docker network create -d bridge --subnet 172.35.0.1/16 tarsdemo
 
-echo "docker pull mysql"
-docker pull mysql:5.6
+# echo "docker pull mysql"
+# docker pull mysql:5.6
 
 echo "docker run mysql"
 docker run -d \
@@ -30,6 +30,9 @@ docker run -d \
         --ip 172.35.0.200 \
         -e MYSQL_ROOT_PASSWORD=12345 \
         mysql:5.6 
+
+echo "Waiting for mysql to start"
+sleep 10
 
 echo "docker pull tars framework"
 docker pull tarscloud/framework:$FRAMEWORK_TAG
