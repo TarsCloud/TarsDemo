@@ -89,3 +89,5 @@ if __name__ == '__main__':
 
     if failed_total > 0:
         exit(255)
+
+    exit(0)
