@@ -1,5 +1,5 @@
 {
-  "name": "test/phphttp/obj",
+  "name": "test/phphttp-helloobj",
   "description": "php http test",
   "require": {
     "phptars/tars-server": "~0.2",

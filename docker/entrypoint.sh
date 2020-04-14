@@ -76,7 +76,7 @@ do
 	    ./run-test.sh ${MYSQL_HOST} 3306 root 12345 ${WEB_HOST} ${MachineIp} ${WEB_TOKEN}
 
 		EXIT_CODE=$(echo $?)
-
+		
 	    exit $EXIT_CODE
 	fi
 

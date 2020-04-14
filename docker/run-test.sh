@@ -131,10 +131,18 @@ make upload
 # --------------------------------------php--------------------------------------
 LOG_DEBUG "Building PHP"
 cd ${SERVERS_PATH}/PhpServer/PHPHttp/src
+mkdir servant
 composer install
+cd ../scripts
+./tars2php.sh
+cd ../src
 composer run-script deploy
 cd ${SERVERS_PATH}/PhpServer/PHPTars/src
+mkdir servant
 composer install
+cd ../scripts
+./tars2php.sh
+cd ../src
 composer run-script deploy
 
 # --------------------------------------golang--------------------------------------

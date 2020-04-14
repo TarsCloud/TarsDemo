@@ -1,5 +1,5 @@
 {
-    "name": "demo/phptars/helloobj",
+    "name": "demo/phptars-helloobj",
     "description": "php tars test",
     "require": {
         "phptars/tars-server": "~0.2",
