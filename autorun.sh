@@ -64,7 +64,7 @@ if [ "$REBUILD" == "true" ]; then
                 -e MYSQL_HOST=172.35.0.200 \
                 --net=tarsdemo \
                 --ip 172.35.0.10 \
-                -p "20000-20020":"20000-20020" \
+                -p "22000-22020":"22000-22020" \
                 tarscloud/tarsdemo:$TARSDEMO_TAG
 else
         docker run --rm \
@@ -73,6 +73,6 @@ else
                 -e MYSQL_HOST=172.35.0.200 \
                 --net=tarsdemo \
                 --ip 172.35.0.10 \
-                -p "20000-20020":"20000-20020" \
+                -p "22000-22020":"22000-22020" \
                 tarscloud/tarsdemo:$TARSDEMO_TAG
 fi
