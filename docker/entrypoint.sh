@@ -71,7 +71,11 @@ do
 
 		/usr/local/app/tars/tarsnode/util/start.sh
 
-        cd ${TEST_PATH}                
+        cd ${TEST_PATH}
+
+		echo "Waiting for framework to finish node registry"
+		sleep 10
+		echo "Starting auto test."
 
 	    ./run-test.sh ${MYSQL_HOST} 3306 root 12345 ${WEB_HOST} ${MachineIp} ${WEB_TOKEN}
 
