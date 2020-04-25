@@ -2,6 +2,7 @@ package com.qq.tars.quickstart.server.demo;
 
 import com.qq.tars.spring.annotation.TarsClient;
 import com.qq.tars.spring.annotation.TarsHttpService;
+import com.qq.tars.spring.annotation.TarsServant;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
