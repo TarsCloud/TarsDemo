@@ -34,10 +34,10 @@ COPY Servers /root/autotest/Servers
 COPY sql /root/autotest/sql
 
 RUN cd /root/autotest/Servers/JavaServer/JavaHttp && mvn package \
-    cd /root/autotest/Servers/JavaServer/JavaTars && mvn package \
-    npm install -g @tars/deploy \
-    cd /root/autotest/Servers/NodejsServer/NodejsHttp && npm install && tars-deploy NodejsHttp \
-    cd /root/autotest/Servers/NodejsServer/NodejsTars && npm install && tars-deploy NodejsTars
+    && cd /root/autotest/Servers/JavaServer/JavaTars && mvn package \
+    && npm install -g @tars/deploy \
+    && cd /root/autotest/Servers/NodejsServer/NodejsHttp && npm install && tars-deploy NodejsHttp \
+    && cd /root/autotest/Servers/NodejsServer/NodejsTars && npm install && tars-deploy NodejsTars
 
 ENTRYPOINT [ "/root/autotest/entrypoint.sh" ]
 
