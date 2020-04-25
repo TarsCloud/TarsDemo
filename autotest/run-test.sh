@@ -154,6 +154,22 @@ cd ${SERVERS_PATH}/GoServer/GoTars
 go mod vendor
 make tar
 
+# --------------------------------------java--------------------------------------
+LOG_DEBUG "Building Java"
+cd ${SERVERS_PATH}/JavaServer/JavaHttp
+mvn package
+cd ${SERVERS_PATH}/JavaServer/JavaTars
+mvn package
+
+# --------------------------------------golang--------------------------------------
+LOG_DEBUG "Building Nodejs"
+npm install -g @tars/deploy
+cd ${SERVERS_PATH}/NodejsServer/NodejsHttp
+tars-deploy NodejsHttp
+cd ${SERVERS_PATH}/NodejsServer/NodejsTars
+tars-deploy NodejsTars
+
+
 # ===============================run test=======================================
 cd ${TEST_PATH}/PythonTestCase/
 python3 run.py -u ${WEB_HOST} -n ${NODE_IP}

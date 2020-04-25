@@ -31,7 +31,8 @@ WORKDIR=$(cd $(dirname $0); pwd)
 
 case $COMMAND in
     "build")
-        docker build --no-cache -t tarscloud/tarsdemo:$TAG ${WORKDIR}/docker
+        #docker build --no-cache -t tarscloud/tarsdemo:$TAG ${WORKDIR}/docker
+        docker build -t tarscloud/tarsdemo:$TAG ${WORKDIR}
         ;;
     "run")
         docker run --rm -e WEB_HOST=${WEB_HOST} -e MYSQL_HOST=${MYSQL_HOST} --net=tarsdemo --ip 172.35.0.10 -p "20000-20020":"20000-20020" tarscloud/tarsdemo:$TAG

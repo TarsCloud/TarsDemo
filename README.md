@@ -35,6 +35,24 @@
 
 ## 当前进展
 
-运行run-test.sh, 完成了Cpp服务的编译和自动部署(还有待改进)
+每次构建成docker来调试非常麻烦, 因此可以通过以下方式调试:
+- 先运行一次autorun.sh, 这样会搭建一套mysql, tarsframework
+- 在构建tarsdemo的docker: ./build-docker.sh build dev
+- 运行docker
+docker run --rm \
+                --name node \
+                -e WEB_HOST=http://172.35.0.2:3000 \
+                -e MYSQL_HOST=172.35.0.200 \
+                --net=tarsdemo \
+                --ip 172.35.0.10 \
+                -p "22000-22020":"22000-22020" \
+                tarscloud/tarsdemo:dev \
+                /root/autotest/debug-entrypoint.sh
+
+
+- 此时, 该docker变成了tars环境的节点
+- 进入docker: docker exec -it xxx bash
+- 进入目录: cd /root/autotest
+- 运行run-test调试: 
 
 ./run-test.sh 127.0.0.1 3306 root xxxx http://127.0.0.1:3000 192.168.50.42 315002464fa8924ef9e0a445e19a233d9b710b1d6820c5536adf7704bab1afdd

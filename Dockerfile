@@ -24,12 +24,20 @@ RUN cd /usr/local/go/src/github.com/TarsCloud/TarsGo/tars/tools/tars2go \
 RUN rm -rf /root/Tars \
     && yum clean all && rm -rf /var/cache/yum
 
+RUN yum -y install maven
+
 RUN mkdir -p /root/autotest
 
-COPY docker/entrypoint.sh docker/run-test.sh /root/autotest/
+COPY autotest/* /root/autotest/
 COPY PythonTestCase /root/autotest/PythonTestCase
 COPY Servers /root/autotest/Servers
 COPY sql /root/autotest/sql
+
+RUN cd /root/autotest/Servers/JavaServer/JavaHttp && mvn package \
+    cd /root/autotest/Servers/JavaServer/JavaTars && mvn package \
+    npm install -g @tars/deploy \
+    cd /root/autotest/Servers/NodejsServer/NodejsHttp && npm install && tars-deploy NodejsHttp \
+    cd /root/autotest/Servers/NodejsServer/NodejsTars && npm install && tars-deploy NodejsTars
 
 ENTRYPOINT [ "/root/autotest/entrypoint.sh" ]
 
