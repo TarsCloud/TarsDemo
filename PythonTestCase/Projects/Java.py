@@ -22,7 +22,7 @@ class JavaServant(Project):
                 module_name='JavaHttp',
                 pkg_dir=prj_dir,
                 pkg_name_prefix='JavaHttp',
-                pkg_ext='.tgz'
+                pkg_ext='.jar'
             )
             self.total_test_cnt += 1
             self.succeed_tests.append('Deploy Http')
@@ -39,7 +39,7 @@ class JavaServant(Project):
                 module_name='JavaTars',
                 pkg_dir=prj_dir,
                 pkg_name_prefix='JavaTars',
-                pkg_ext='.tgz'
+                pkg_ext='.jar'
             )
             self.total_test_cnt += 1
             self.succeed_tests.append('Deploy Tars')
