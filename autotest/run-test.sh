@@ -163,6 +163,8 @@ mvn package
 
 # --------------------------------------golang--------------------------------------
 LOG_DEBUG "Building Nodejs"
+source /root/.bashrc
+source /etc/profile
 npm install -g @tars/deploy
 cd ${SERVERS_PATH}/NodejsServer/NodejsHttp
 tars-deploy NodejsHttp
