@@ -55,7 +55,7 @@ docker run -d --net=tarsdemo \
 
 if [ "$REBUILD" == "true" ]; then
         echo "docker build tars-demo"
-        docker build -f docker/Dockerfile -t tarscloud/tarsdemo:$TARSDEMO_TAG .
+        docker build -f Dockerfile -t tarscloud/tarsdemo:$TARSDEMO_TAG .
 
         echo "docker run tars-demo"
         docker run --rm \
