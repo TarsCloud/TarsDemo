@@ -25,7 +25,6 @@ fi
 echo "WEB_HOST:    ${WEB_HOST}"
 echo "MachineIp:   ${MachineIp}"
 echo "MYSQL_HOST:  ${MYSQL_HOST}"
-echo "WEB_TOKEN:   ${WEB_TOKEN}"
 
 #mkdir -p /usr/local/app/tars/
 #mkdir -p /usr/local/app/tars/tarsnode
@@ -77,7 +76,7 @@ do
 		sleep 10
 		echo "Starting auto test."
 
-	    ./run-test.sh ${MYSQL_HOST} 3306 root 12345 ${WEB_HOST} ${MachineIp} ${WEB_TOKEN}
+	    ./run-test.sh ${MYSQL_HOST} 3306 root 12345 ${WEB_HOST} ${MachineIp} 
 
 		EXIT_CODE=$(echo $?)
 		

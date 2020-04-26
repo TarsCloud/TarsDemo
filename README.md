@@ -54,5 +54,4 @@ docker run --rm \
 - 进入docker: docker exec -it xxx bash
 - 进入目录: cd /root/autotest
 - 运行run-test调试: 
-
-./run-test.sh 127.0.0.1 3306 root xxxx http://127.0.0.1:3000 192.168.50.42 315002464fa8924ef9e0a445e19a233d9b710b1d6820c5536adf7704bab1afdd
+./run-test.sh 172.35.0.200 3306 root 12345 http://172.35.0.2:3000 172.35.0.10

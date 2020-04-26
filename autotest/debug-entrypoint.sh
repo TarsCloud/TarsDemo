@@ -25,7 +25,6 @@ fi
 echo "WEB_HOST:    ${WEB_HOST}"
 echo "MachineIp:   ${MachineIp}"
 echo "MYSQL_HOST:  ${MYSQL_HOST}"
-echo "WEB_TOKEN:   ${WEB_TOKEN}"
 
 #mkdir -p /usr/local/app/tars/
 #mkdir -p /usr/local/app/tars/tarsnode
@@ -70,7 +69,7 @@ do
 
 		/usr/local/app/tars/tarsnode/util/start.sh
 
-                sleep infinity
+        sleep infinity
 	fi
 
 	echo "install tarsnode failed, retry 3 seconds later..."
