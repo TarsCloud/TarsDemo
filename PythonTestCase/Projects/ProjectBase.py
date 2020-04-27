@@ -4,11 +4,10 @@ from abc import ABCMeta, abstractmethod
 import os
 import time
 import requests
+import random
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 # sleep specific time after service publishing to wait for service activating
-SERVANT_ACTIVATING_SECONDS = 30
-
 
 # Project Base Class
 class Project(metaclass=ABCMeta):
@@ -80,7 +79,7 @@ class Project(metaclass=ABCMeta):
         if resp.ok is not True:
             self._print_err("{0}: Deploy failed: {1}".format(self._language, str(resp.content())))
             raise Exception("{0}: Deploy failed: {1}".format(self._language, str(resp.content())))
-        time.sleep(SERVANT_ACTIVATING_SECONDS)
+        time.sleep(random.randint(15, 35))
 
     def _get_pkg_fname(self, pkg_dir, pkg_name_prefix, pkg_ext):
         pkg_name = ''

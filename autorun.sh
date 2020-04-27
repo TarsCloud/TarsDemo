@@ -25,7 +25,7 @@ echo "docker run mysql"
 docker run -d \
         --rm \
         --name mysql \
-        -p 3306:3306 \
+        -p 3307:3306 \
         --net=tarsdemo \
         --ip 172.35.0.200 \
         -e MYSQL_ROOT_PASSWORD=12345 \
