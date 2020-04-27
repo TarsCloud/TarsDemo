@@ -93,7 +93,9 @@ class Project(metaclass=ABCMeta):
         if len(pkg_name) < len(pkg_name_prefix) + ext_len:
             self._print_err('{0}: Deploy package for {1} cannot be found.'.format(self._language, pkg_name_prefix))
             raise Exception('{0}: Deploy package for {1} cannot be found.'.format(self._language, pkg_name_prefix))
+            
         pkg_fname = os.path.join(pkg_dir, pkg_name)
+        self._print_info('{0}: Package found {1}.'.format(self._language, pkg_fname))
         return pkg_fname, pkg_name
 
     @staticmethod

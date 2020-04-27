@@ -161,14 +161,16 @@ mvn package
 cd ${SERVERS_PATH}/JavaServer/JavaTars
 mvn package
 
-# --------------------------------------golang--------------------------------------
+# --------------------------------------nodejs--------------------------------------
 LOG_DEBUG "Building Nodejs"
 source /root/.bashrc
 source /etc/profile
 npm install -g @tars/deploy
 cd ${SERVERS_PATH}/NodejsServer/NodejsHttp
+npm install
 tars-deploy NodejsHttp
 cd ${SERVERS_PATH}/NodejsServer/NodejsTars
+npm install
 tars-deploy NodejsTars
 
 
