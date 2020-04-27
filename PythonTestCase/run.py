@@ -32,12 +32,16 @@ def publish_and_test_servants():
     # publish
     deploy_php = td.Thread(target=php_serv.publish_and_test, args=())
     deploy_php.start()
+    time.sleep(1)
     deploy_golang = td.Thread(target=golang_serv.publish_and_test, args=())
     deploy_golang.start()
+    time.sleep(1)
     deploy_nodejs = td.Thread(target=nodejs_serv.publish_and_test, args=())
     deploy_nodejs.start()
+    time.sleep(1)
     deploy_java = td.Thread(target=java_serv.publish_and_test, args=())
     deploy_java.start()
+    time.sleep(1)
     deploy_cpp = td.Thread(target=cpp_serv.publish_and_test, args=())
     deploy_cpp.start()
 
