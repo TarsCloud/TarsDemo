@@ -67,6 +67,8 @@ if [ "$REBUILD" == "true" ]; then
                 -p "22000-22020":"22000-22020" \
                 tarscloud/tarsdemo:$TARSDEMO_TAG
 else
+        echo "docker pull tars tarsdemo"
+        docker pull tarscloud/tarsdemo:$TARSDEMO_TAG
         docker run --rm \
                 --name node \
                 -e WEB_HOST=http://172.35.0.2:3000 \
