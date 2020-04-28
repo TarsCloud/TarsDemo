@@ -196,7 +196,9 @@ class Project(metaclass=ABCMeta):
         tarsActived = False
         while tarsActived is False :
             tarsActived = util.is_server_activated(self._tars_serv_name)
+            self._print_info("Wait {0} activating...".format(self._tars_serv_name))
             time.sleep(1)
+        time.sleep(5)
         self.test_tars()
 
     def deploy_publish_and_test(self):

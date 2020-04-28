@@ -77,5 +77,3 @@ else
                 -p "22000-22020":"22000-22020" \
                 tarscloud/tarsdemo:$TARSDEMO_TAG
 fi
-
-docker kill mysql framework
