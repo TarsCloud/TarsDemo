@@ -53,7 +53,7 @@ fi
 # clear network if exists
 docker_network=`docker network ls  | grep tarsdemo | awk '{print $2}'`
 if [[ $docker_network = 'tarsdemo' ]]; then
-    docker network remove
+    docker network rm tarsdemo
 fi
 
 docker network create -d bridge --subnet 172.35.0.1/16 tarsdemo
