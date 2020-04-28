@@ -14,5 +14,4 @@ jobs:
       - uses: actions/checkout@v1
       - name: test framework nightly build
         run: |
-          ./autorun.sh nightly latest true
-          docker kill mysql framework
+          ./autorun.sh nightly latest false
