@@ -35,7 +35,7 @@ echo "Waiting for mysql to start"
 sleep 10
 
 echo "docker pull tars framework"
-# docker pull tarscloud/framework:$FRAMEWORK_TAG
+docker pull tarscloud/framework:$FRAMEWORK_TAG
 
 echo "docker run tars framework"
 docker run -d --net=tarsdemo \
