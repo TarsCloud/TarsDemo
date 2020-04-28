@@ -79,8 +79,6 @@ do
 	    ./run-test.sh ${WEB_HOST} ${MachineIp} ${REBUILD_PROJECTS}
 
 		EXIT_CODE=$(echo $?)
-
-		docker kill mysql framework
 		
 	    exit $EXIT_CODE
 	fi
