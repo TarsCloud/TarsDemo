@@ -2,27 +2,22 @@
 .idea/*
 
 # cpp
-Servers/CppServer/build
 
 # golang
 Servers/GoServer/GoHttp/vendor/*
 Servers/GoServer/GoHttp/go.sum
-Servers/GoServer/GoHttp/*.tgz
 Servers/GoServer/GoTars/vendor/*
 Servers/GoServer/GoTars/go.sum
-Servers/GoServer/GoTars/*.tgz
 
 # php
 Servers/PhpServer/PHPHttp/.idea/*
 Servers/PhpServer/PHPHttp/src/vendor/*
 Servers/PhpServer/PHPHttp/src/composer.lock
 Servers/PhpServer/PHPHttp/src/servant/*
-Servers/PhpServer/PHPHttp/src/*.tar.gz
 Servers/PhpServer/PHPTars/.idea/*
 Servers/PhpServer/PHPTars/src/vendor/*
 Servers/PhpServer/PHPTars/src/composer.lock
 Servers/PhpServer/PHPTars/src/servant/*
-Servers/PhpServer/PHPTars/src/*.tar.gz
 
 # nodejs
 Servers/NodejsServer/NodejsHttp/package-lock.json

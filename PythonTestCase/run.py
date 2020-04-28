@@ -9,7 +9,10 @@ from Projects.Cpp import CppServant
 import threading as td
 import time
 import optparse
+import sys
+import importlib
 
+importlib.reload(sys)
 
 # get web url and user token from runtime parameters
 def get_web_url_and_token():
@@ -30,27 +33,27 @@ def get_web_url_and_token():
 # publish and test servants in multi-threading
 def publish_and_test_servants():
     # publish
-    deploy_php = td.Thread(target=php_serv.publish_and_test, args=())
-    deploy_php.start()
-    time.sleep(1)
-    deploy_golang = td.Thread(target=golang_serv.publish_and_test, args=())
-    deploy_golang.start()
-    time.sleep(1)
-    deploy_nodejs = td.Thread(target=nodejs_serv.publish_and_test, args=())
-    deploy_nodejs.start()
-    time.sleep(1)
-    deploy_java = td.Thread(target=java_serv.publish_and_test, args=())
-    deploy_java.start()
-    time.sleep(1)
-    deploy_cpp = td.Thread(target=cpp_serv.publish_and_test, args=())
-    deploy_cpp.start()
+    php_testcase = td.Thread(target=php_serv.deploy_publish_and_test, args=())
+    php_testcase.start()
+
+    golang_testcase = td.Thread(target=golang_serv.deploy_publish_and_test, args=())
+    golang_testcase.start()
+
+    nodejs_testcase = td.Thread(target=nodejs_serv.deploy_publish_and_test, args=())
+    nodejs_testcase.start()
+
+    java_testcase = td.Thread(target=java_serv.deploy_publish_and_test, args=())
+    java_testcase.start()
+
+    cpp_testcase = td.Thread(target=cpp_serv.deploy_publish_and_test, args=())
+    cpp_testcase.start()
 
     # wait
-    deploy_php.join()
-    deploy_golang.join()
-    deploy_nodejs.join()
-    deploy_java.join()
-    deploy_cpp.join()
+    php_testcase.join()
+    golang_testcase.join()
+    nodejs_testcase.join()
+    java_testcase.join()
+    cpp_testcase.join()
 
 
 # get runtime parameters

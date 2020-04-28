@@ -76,7 +76,7 @@ do
 		sleep 10
 		echo "Starting auto test."
 
-	    ./run-test.sh ${MYSQL_HOST} 3306 root 12345 ${WEB_HOST} ${MachineIp} 
+	    ./run-test.sh ${WEB_HOST} ${MachineIp} ${REBUILD_PROJECTS}
 
 		EXIT_CODE=$(echo $?)
 		

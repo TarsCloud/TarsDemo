@@ -35,7 +35,7 @@ echo "Waiting for mysql to start"
 sleep 10
 
 echo "docker pull tars framework"
-docker pull tarscloud/framework:$FRAMEWORK_TAG
+# docker pull tarscloud/framework:$FRAMEWORK_TAG
 
 echo "docker run tars framework"
 docker run -d --net=tarsdemo \
@@ -47,7 +47,6 @@ docker run -d --net=tarsdemo \
         -e INET=eth0 \
         -e TARS_WEB_UPLOAD=true \
         -e SLAVE=false \
-        -v /tmp/data/tars:/data/tars \
         --ip 172.35.0.2 \
         -p 3000:3000 \
         -p 3001:3001 \
@@ -62,6 +61,7 @@ if [ "$REBUILD" == "true" ]; then
                 --name node \
                 -e WEB_HOST=http://172.35.0.2:3000 \
                 -e MYSQL_HOST=172.35.0.200 \
+                -e REBUILD_PROJECTS=false \
                 --net=tarsdemo \
                 --ip 172.35.0.10 \
                 -p "22000-22020":"22000-22020" \
@@ -71,8 +71,11 @@ else
                 --name node \
                 -e WEB_HOST=http://172.35.0.2:3000 \
                 -e MYSQL_HOST=172.35.0.200 \
+                -e REBUILD_PROJECTS=false \
                 --net=tarsdemo \
                 --ip 172.35.0.10 \
                 -p "22000-22020":"22000-22020" \
                 tarscloud/tarsdemo:$TARSDEMO_TAG
 fi
+
+docker kill mysql framework
