@@ -19,6 +19,8 @@ class GoLangServant(Project):
     _server_type = 'tars_go'
     _http_template_name = 'tars.default'
     _tars_template_name = 'tars.default'
+    # wait specific seconds after service published 
+    _wait_start_sec = 5
 
     def test_http(self):
         self._ping_http("{0}/test/ping")

@@ -36,6 +36,8 @@ class Project(metaclass=ABCMeta):
     # the template name of each test servant
     _http_template_name = ''
     _tars_template_name = ''
+    # wait specific seconds after service published 
+    _wait_start_sec = 5
 
     def __init__(self, web_url, node_ip):
         """The base Class of projects test case
@@ -191,14 +193,14 @@ class Project(metaclass=ABCMeta):
                 self._print_info("Wait {0} activating...".format(self._http_serv_name))
             time.sleep(1)
         # wait 5 seconds incase service doesn't fully activated
-        time.sleep(5)
+        time.sleep(self._wait_start_sec)
         self.test_http()
         tarsActived = False
         while tarsActived is False :
             tarsActived = util.is_server_activated(self._tars_serv_name)
             self._print_info("Wait {0} activating...".format(self._tars_serv_name))
             time.sleep(1)
-        time.sleep(5)
+        time.sleep(self._wait_start_sec)
         self.test_tars()
 
     def deploy_publish_and_test(self):

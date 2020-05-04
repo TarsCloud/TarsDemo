@@ -19,6 +19,8 @@ class NodeJsServant(Project):
     _server_type = 'tars_nodejs'
     _http_template_name = 'tars.nodejs.default'
     _tars_template_name = 'tars.nodejs.default'
+    # wait specific seconds after service published 
+    _wait_start_sec = 5
 
     def test_http(self):
         self._ping_http("{0}/test/ping")

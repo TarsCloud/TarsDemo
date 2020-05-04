@@ -19,6 +19,8 @@ class CppServant(Project):
     _server_type = 'tars_cpp'
     _http_template_name = 'tars.cpp.default'
     _tars_template_name = 'tars.cpp.default'
+    # wait specific seconds after service published 
+    _wait_start_sec = 5
 
     def test_http(self):
         self._ping_http("{0}/test/ping")
