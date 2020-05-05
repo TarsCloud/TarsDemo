@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -lt 3 ]; then
-    echo "$0 framework-tag(dev) tarsdemo-tag(dev) rebuld(true/false)"
+    echo "$0 framework-tag(dev) tarsdemo-tag(dev) rebuld(true/false) update-framework-image(true/false)"
     echo "rebuild means rebuild tarsdemo"
     exit 0
 fi
@@ -9,6 +9,7 @@ fi
 FRAMEWORK_TAG=$1
 TARSDEMO_TAG=$2
 REBUILD=$3
+PULL_FRAMEWORK=$4
 
 ifconfig
 
@@ -58,8 +59,8 @@ fi
 
 docker network create -d bridge --subnet 172.35.0.1/16 tarsdemo
 
-# echo "docker pull mysql"
-# docker pull mysql:5.6
+echo "docker pull mysql"
+docker pull mysql:5.6
 
 echo "docker run mysql"
 docker run -d \
@@ -74,10 +75,12 @@ docker run -d \
 echo "Waiting for mysql to start"
 sleep 10
 
-echo "docker pull tars framework"
-docker pull tarscloud/framework:$FRAMEWORK_TAG
+if [ $PULL_FRAMEWORK != 'false' ]; then
+    echo "docker pull tars framework"
+    docker pull tarscloud/framework:$FRAMEWORK_TAG
+fi
 
-echo "docker run tars framework"
+echo "docker run tars framework tarscloud/framework:$FRAMEWORK_TAG"
 docker run -d --net=tarsdemo \
         --rm \
         --name framework \

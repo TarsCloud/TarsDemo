@@ -2,8 +2,6 @@
 # coding: utf-8
 from ProjectBase import Project, PROJECT_ROOT
 import os
-import time
-from Utils import TestUtils
 
 # Java test class
 class JavaServant(Project):
@@ -20,6 +18,8 @@ class JavaServant(Project):
     _server_type = 'tars_java'
     _http_template_name = 'tars.springboot'
     _tars_template_name = 'tars.springboot'
+    # wait specific seconds after service published 
+    _wait_start_sec = 30
 
     def test_http(self):
         self._ping_http("{0}/test/ping")
