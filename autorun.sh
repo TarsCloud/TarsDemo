@@ -66,7 +66,6 @@ echo "docker run mysql"
 docker run -d \
         --rm \
         --name mysql \
-        -p 3307:3306 \
         --net=tarsdemo \
         --ip 172.35.0.200 \
         -e MYSQL_ROOT_PASSWORD=12345 \
@@ -91,8 +90,6 @@ docker run -d --net=tarsdemo \
         -e TARS_WEB_UPLOAD=true \
         -e SLAVE=false \
         --ip 172.35.0.2 \
-        -p 3000:3000 \
-        -p 3001:3001 \
         tarscloud/framework:$FRAMEWORK_TAG
 
 if [[ $REBUILD = "true" ]]; then
@@ -107,7 +104,6 @@ if [[ $REBUILD = "true" ]]; then
                 -e REBUILD_PROJECTS=false \
                 --net=tarsdemo \
                 --ip 172.35.0.10 \
-                -p "22000-22020":"22000-22020" \
                 tarscloud/tarsdemo:$TARSDEMO_TAG
 else
         echo "docker pull tars tarsdemo"
@@ -119,6 +115,5 @@ else
                 -e REBUILD_PROJECTS=false \
                 --net=tarsdemo \
                 --ip 172.35.0.10 \
-                -p "22000-22020":"22000-22020" \
                 tarscloud/tarsdemo:$TARSDEMO_TAG
 fi
