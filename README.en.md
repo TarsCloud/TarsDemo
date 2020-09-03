@@ -24,14 +24,14 @@ Complete automatic testing of the framework(>=2.4.0)
 - Build and run the TARS image
 >- `git clone https://github.com/TarsCloud/TarsDocker`
 >- `./build-docker.sh framework development`
->- Build framework: tarscloud/framework:dev
+>- Build framework: `tarscloud/framework:dev`
 >- Run image (note the setting UPLOAD = true)
 
 - Build TarsDemo image
 >- `git clone https://github.com/TarsCloud/TarsDemo`
 >- `./build-docker.sh build developers`
->- Build demo image: tarscloud / tarsdemo: dev
->- Run automatic testing: ./build-docker.sh run dev WEB_HOST MYSQL_HOST
+>- Build demo image: `tarscloud / tarsdemo: dev`
+>- Run automatic testing: `./build-docker.sh run dev WEB_HOST MYSQL_HOST`
 
 The above logic is implemented in `autorun.sh`, and can be run directly:
 
@@ -39,7 +39,7 @@ The above logic is implemented in `autorun.sh`, and can be run directly:
 ## Current Progress
 
 It is inconvenient to debug by building into docker, so you can instead debug in the following way:
-- Run autorun.sh once. This will build a set of mysql, tarsframework
+- Run `autorun.sh` once. This will build a set of mysql, tarsframework
 - In the docker where tarsdemo was built: `./build-docker.sh build dev`
 - Run docker
 ```
