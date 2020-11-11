@@ -11,7 +11,7 @@ class TestUtils():
 
     # get tree node id of test application
     def _init_tree_node_id(self):
-        url = '{0}/api/tree'.format(self._web_url)
+        url = '{0}/api/tree?type=1'.format(self._web_url)
         try:
             resp = requests.get(url)
             resp.encoding = 'utf-8'
