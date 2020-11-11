@@ -17,6 +17,7 @@ HOSTIP=`ifconfig | sed 's/addr//g' | grep eth0 -A3 | grep "inet " | awk -F'[ :]+
 
 echo HOSTIP:${HOSTIP}
 
+<<<<<<< HEAD
 # clear containers
 mysql_container=`docker ps --format="table {{.Names}}" -f name=mysql | grep mysql`
 if [[ $mysql_container = 'mysql' ]]; then
@@ -57,6 +58,7 @@ if [[ $docker_network = 'tarsdemo' ]]; then
     docker network rm tarsdemo
 fi
 
+docker network rm tarsdemo
 docker network create -d bridge --subnet 172.35.0.1/16 tarsdemo
 
 echo "docker pull mysql"

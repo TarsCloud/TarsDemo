@@ -22,8 +22,7 @@
 
 - 构建并运行TARS镜像
 >- git clone https://github.com/TarsCloud/TarsDocker
->- ./build-docker.sh framework dev
->- 构建framework镜像 tarscloud/framework:dev  
+>- 构建framework镜像: ./build-docker.sh framework dev
 >- 运行镜像(注意设定UPLOAD=true)
 
 - 构建TarsDemo镜像
@@ -40,20 +39,9 @@
 每次构建成docker来调试非常麻烦, 因此可以通过以下方式调试:
 - 先运行一次autorun.sh, 这样会搭建一套mysql, tarsframework
 - 在构建tarsdemo的docker: ./build-docker.sh build dev
-- 运行docker
-docker run --rm \
-                --name node \
-                -e WEB_HOST=http://172.35.0.2:3000 \
-                -e MYSQL_HOST=172.35.0.200 \
-                --net=tarsdemo \
-                --ip 172.35.0.10 \
-                -p "22000-22020":"22000-22020" \
-                tarscloud/tarsdemo:dev \
-                /root/autotest/debug-entrypoint.sh
-
-
+- 运行docker: docker run --entrypoint=/root/autotest/debug-entrypoint.sh --rm --name node -e WEB_HOST=http://172.35.0.2:3000 -e MYSQL_HOST=172.35.0.200 --net=tarsdemo --ip 172.35.0.10 -p "22000-22020":"22000-22020" tarscloud/tarsdemo:dev
 - 此时, 该docker变成了tars环境的节点
 - 进入docker: docker exec -it xxx bash
 - 进入目录: cd /root/autotest
 - 运行run-test调试: 
-./run-test.sh 172.35.0.200 3306 root 12345 http://172.35.0.2:3000 172.35.0.10
+./run-test.sh http://172.35.0.2:3000 172.35.0.10 false
