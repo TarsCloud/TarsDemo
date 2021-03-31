@@ -89,6 +89,7 @@ docker run -d --net=tarsdemo \
         -e REBUILD=true \
         -e INET=eth0 \
         -e TARS_WEB_UPLOAD=true \
+        -e TARS_ENABLE_LOGIN=false \
         -e SLAVE=false \
         --ip 172.35.0.2 \
         tarscloud/framework:$FRAMEWORK_TAG
