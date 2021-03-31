@@ -6,6 +6,7 @@ WORKDIR /root/
 ENV GOPATH=/usr/local/go
 ENV JAVA_HOME /usr/java/jdk-10.0.2
 ENV DEBIAN_FRONTEND=noninteractive
+ENV SWOOLE_VERSION=v4.4.16 
 # Install
 RUN apt update 
 
@@ -18,31 +19,51 @@ RUN apt install -y php php-dev php-cli php-gd php-curl php-mysql \
     php-zip php-fileinfo php-redis php-mbstring tzdata git make wget \
     build-essential libmcrypt-dev php-pear
 
-RUN mkdir -p /tmp/pear/cache \
-    && pecl channel-update pecl.php.net \
-    && pecl install swoole \
-    && echo 'extension=swoole.so' >> /etc/php/7.4/cli/conf.d/swoole.ini \
-    && pecl install mcrypt \
-    && echo 'extension=mcrypt.so' >> /etc/php/7.4/cli/conf.d/mcrypt.ini
+# Clone Tars repo and init php submodule
+RUN cd /root/ && git clone https://gitee.com/TarsCloud/Tars.git \
+	&& cd /root/Tars/ \
+	&& git submodule update --init --recursive php \
+	#intall PHP Tars module
+	&& cd /root/Tars/php/tars-extension/ && phpize \
+	&& ./configure --enable-phptars && make && make install \
+	&& echo "extension=phptars.so" > /etc/php/7.4/cli/conf.d/10-phptars.ini \
+	# Install PHP swoole module
+	&& cd /root && git clone https://github.com/swoole/swoole \
+	&& cd /root/swoole && git checkout $SWOOLE_VERSION \
+	&& cd /root/swoole \
+	&& phpize && ./configure --with-php-config=/usr/bin/php-config \
+	&& make \
+	&& make install \
+	&& echo "extension=swoole.so" > /etc/php/7.4/cli/conf.d/20-swoole.ini \
+	# Do somethine clean
+	&& cd /root && rm -rf swoole \
+	&& mkdir -p /root/phptars && cp -f /root/Tars/php/tars2php/src/tars2php.php /root/phptars 
+
+#RUN mkdir -p /tmp/pear/cache \
+#    && pecl channel-update pecl.php.net \
+#    && pecl install swoole \
+#    && echo 'extension=swoole.so' >> /etc/php/7.4/cli/conf.d/swoole.ini \
+#    && pecl install mcrypt \
+#    && echo 'extension=mcrypt.so' >> /etc/php/7.4/cli/conf.d/mcrypt.ini
     
-RUN cd /root/ \
-    && git clone git://github.com/TarsCloud/Tars \
-    && cd /root/Tars/ \
-    && git submodule update --init --recursive php  
+#RUN cd /root/ \
+#    && git clone git://github.com/TarsCloud/Tars \
+#    && cd /root/Tars/ \
+#    && git submodule update --init --recursive php  
 
-RUN cd /tmp \
-    && curl -fsSL https://getcomposer.org/installer | php \
-    && chmod +x composer.phar \
-    && mv composer.phar /usr/local/bin/composer \
-    && cd /root/Tars/php/tars-extension/ \
-    && phpize --clean \
-    && phpize \
-    && ./configure --enable-phptars --with-php-config=/usr/bin/php-config \
-    && make -j4\
-    && make install 
+#RUN cd /tmp \
+#    && curl -fsSL https://getcomposer.org/installer | php \
+#    && chmod +x composer.phar \
+#    && mv composer.phar /usr/local/bin/composer \
+#    && cd /root/Tars/php/tars-extension/ \
+#    && phpize --clean \
+#    && phpize \
+#    && ./configure --enable-phptars --with-php-config=/usr/bin/php-config \
+#    && make -j4\
+#    && make install 
 
-RUN mkdir -p /etc/php.d/\
-    && echo "extension=phptars.so" > /etc/php.d/phptars.ini 
+#RUN mkdir -p /etc/php.d/\
+#    && echo "extension=phptars.so" > /etc/php.d/phptars.ini 
 
 #    && mkdir -p /root/phptars \
 #    && cp -f /root/Tars/php/tars2php/src/tars2php.php /root/phptars \
