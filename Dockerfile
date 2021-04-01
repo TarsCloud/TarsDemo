@@ -1,10 +1,8 @@
 FROM ubuntu:20.04
-#FROM centos/systemd
 
 WORKDIR /root/
 
 ENV GOPATH=/usr/local/go
-ENV JAVA_HOME /usr/java/jdk-10.0.2
 ENV DEBIAN_FRONTEND=noninteractive
 ENV SWOOLE_VERSION=v4.4.16 
 # Install
@@ -22,9 +20,12 @@ RUN apt install -y mysql-client git build-essential unzip make golang cmake flex
     && npm install -g npm pm2 \
 # Get and install JDK
     && apt install -y openjdk-11-jdk \
-    && apt install -y python3 python3-pip maven  && pip3 install requests \
     && apt clean
-   
+
+RUN apt install -y python3 python3-pip maven \
+    && pip3 install requests \
+    && apt clean
+
 # Clone Tars repo and init php submodule
 RUN cd /root/ && git clone https://gitee.com/TarsCloud/Tars.git \
 	&& cd /root/Tars/ \
