@@ -13,4 +13,4 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER_NAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
       - uses: actions/checkout@v1
       - name: build tars demo docker
-        run: ./build-docker.sh latest
+        run: ./build-push.sh latest
