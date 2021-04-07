@@ -18,44 +18,44 @@ HOSTIP=`ifconfig | sed 's/addr//g' | grep eth0 -A3 | grep "inet " | awk -F'[ :]+
 echo HOSTIP:${HOSTIP}
 
 # clear containers
-mysql_container=`docker ps --format="table {{.Names}}" -f name=mysql | grep mysql`
-if [[ $mysql_container = 'mysql' ]]; then
-    echo "Found mysql running container, killing..."
+#mysql_container=`docker ps --format="table {{.Names}}" -f name=mysql | grep mysql`
+#if [[ $mysql_container = 'mysql' ]]; then
+#    echo "Found mysql running container, killing..."
     docker kill mysql
-fi
-mysql_container=`docker container ls --format="table {{.Names}}" -f name=mysql | grep mysql`
-if [[ $mysql_container = 'mysql' ]]; then
-    echo "Found mysql container, removing..."
+#fi
+#mysql_container=`docker container ls --format="table {{.Names}}" -f name=mysql | grep mysql`
+#if [[ $mysql_container = 'mysql' ]]; then
+#    echo "Found mysql container, removing..."
     docker container rm mysql
-fi
+#fi
 
-framework_container=`docker ps --format="table {{.Names}}" -f name=framework | grep framework`
-if [[ $framework_container = 'framework' ]]; then
-    echo "Found framework running container, killing..."
+#framework_container=`docker ps --format="table {{.Names}}" -f name=framework | grep framework`
+#if [[ $framework_container = 'framework' ]]; then
+#    echo "Found framework running container, killing..."
     docker kill framework
-fi
-framework_container=`docker container ls --format="table {{.Names}}" -f name=framework | grep framework`
-if [[ $framework_container = 'framework' ]]; then
-    echo "Found framework container, removing..."
+#fi
+#framework_container=`docker container ls --format="table {{.Names}}" -f name=framework | grep framework`
+#if [[ $framework_container = 'framework' ]]; then
+#    echo "Found framework container, removing..."
     docker container rm framework
-fi
+#fi
 
-node_container=`docker ps --format="table {{.Names}}" -f name=node | grep node`
-if [[ $node_container = 'node' ]]; then
-    echo "Found node runing container, killing..."
+#node_container=`docker ps --format="table {{.Names}}" -f name=node | grep node`
+#if [[ $node_container = 'node' ]]; then
+#    echo "Found node runing container, killing..."
     docker kill node
-fi
-node_container=`docker container ls --format="table {{.Names}}" -f name=node | grep node`
-if [[ $node_container = 'node' ]]; then
-    echo "Found node container, removing..."
+#fi
+#node_container=`docker container ls --format="table {{.Names}}" -f name=node | grep node`
+#if [[ $node_container = 'node' ]]; then
+#    echo "Found node container, removing..."
     docker container rm node
-fi
+#fi
 
 # clear network if exists
-docker_network=`docker network ls  | grep tarsdemo | awk '{print $2}'`
-if [[ $docker_network = 'tarsdemo' ]]; then
+#docker_network=`docker network ls  | grep tarsdemo | awk '{print $2}'`
+#if [[ $docker_network = 'tarsdemo' ]]; then
     docker network rm tarsdemo
-fi
+#fi
 
 docker network rm tarsdemo
 docker network create -d bridge --subnet 172.35.0.1/16 tarsdemo
