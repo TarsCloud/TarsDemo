@@ -39,7 +39,6 @@ trap 'exit' SIGTERM SIGINT
 
 TEST_PATH=$(cd $(dirname $0); pwd)
 
-
 while [ 1 ]
 do
 	rm -rf get_tarsnode.sh
@@ -65,15 +64,16 @@ do
 
 		#echo "tarsnode.conf: --------------------------------------------------------"
 
-		#cat /usr/local/app/tars/tarsnode/conf/tars.tarsnode.config.conf 
 		echo "install tarsnode succ, check tarsnode alive"
 
 		/usr/local/app/tars/tarsnode/util/start.sh
+		sleep 1
+		/usr/local/app/tars/tarsnode/util/monitor.sh
 
         cd ${TEST_PATH}
 
 		echo "Waiting for framework to finish node registry"
-		sleep 10
+		sleep 15
 		echo "Starting auto test."
 
 	    ./run-test.sh ${WEB_HOST} ${MachineIp} ${REBUILD_PROJECTS}
