@@ -66,8 +66,8 @@ do
 
 		echo "install tarsnode succ, check tarsnode alive"
 
-		/usr/local/app/tars/tarsnode/util/start.sh
-		sleep 1
+		# /usr/local/app/tars/tarsnode/util/start.sh
+		# sleep 1
 		/usr/local/app/tars/tarsnode/util/monitor.sh
 
         cd ${TEST_PATH}
