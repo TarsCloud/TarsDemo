@@ -76,15 +76,68 @@ make -j4
 cd ${SERVERS_PATH}/..
 exec-build.sh tarscloud/tars.cppbase cpp Servers/CppServer/build/bin/CppHttp yaml/CppHttp.yaml latest true
 exec-helm.sh yaml/CppHttp.yaml latest
-exec-deploy.sh tars-dev demo-cpphttp.tgz
+exec-deploy.sh tars-dev demo-cpphttp-1.0.0.tgz
 
-# exec-build.sh tarscloud/tars.cppbase cpp Servers/CppServer/build/bin/CppTars yaml/CppTars.yaml latest true
+exec-build.sh tarscloud/tars.cppbase cpp Servers/CppServer/build/bin/CppTars yaml/CppTars.yaml latest true
+exec-helm.sh yaml/CppTars.yaml latest
+exec-deploy.sh tars-dev demo-cpptars-1.0.0.tgz
 
-# make upload
 
-exit 0
+# --------------------------------------golang--------------------------------------
+LOG_DEBUG "Building GoLang"
+cd ${SERVERS_PATH}/GoServer/GoHttp
+go mod vendor
+make
+cd ${SERVERS_PATH}/..
+exec-build.sh tarscloud/tars.cppbase go Servers/GoServer/GoHttp/GoHttp yaml/GoHttp.yaml latest true
+exec-helm.sh yaml/GoHttp.yaml latest
+exec-deploy.sh tars-dev demo-gohttp-1.0.0.tgz
 
-#sleep 20000000
+cd ${SERVERS_PATH}/GoServer/GoTars
+go mod vendor
+make
+cd ${SERVERS_PATH}/..
+exec-build.sh tarscloud/tars.cppbase go Servers/GoServer/GoTars/GoTars yaml/GoTars.yaml latest true
+exec-helm.sh yaml/GoTars.yaml latest
+exec-deploy.sh tars-dev demo-gotars-1.0.0.tgz
+
+# --------------------------------------java--------------------------------------
+LOG_DEBUG "Building Java"
+cd ${SERVERS_PATH}/JavaServer/JavaHttp
+rm -rf ./target
+mvn package
+cd ${SERVERS_PATH}/..
+exec-build.sh tarscloud/tars.javabase java Servers/JavaServer/JavaHttp/target/JavaHttp-1.0-SNAPSHOT.jar yaml/JavaHttp.yaml latest true
+exec-helm.sh yaml/JavaHttp.yaml latest
+exec-deploy.sh tars-dev demo-javahttp-1.0.0.tgz
+
+cd ${SERVERS_PATH}/JavaServer/JavaTars
+rm -rf ./target
+mvn package
+cd ${SERVERS_PATH}/..
+exec-build.sh tarscloud/tars.javabase java Servers/JavaServer/JavaTars/target/JavaTars-1.0-SNAPSHOT.jar yaml/JavaTars.yaml latest true
+exec-helm.sh yaml/JavaTars.yaml latest
+exec-deploy.sh tars-dev demo-javatars-1.0.0.tgz
+
+# --------------------------------------nodejs--------------------------------------
+LOG_DEBUG "Building Nodejs"
+source /root/.bashrc
+source /etc/profile
+cd ${SERVERS_PATH}/NodejsServer/NodejsHttp
+npm install
+cd ${SERVERS_PATH}/..
+exec-build.sh tarscloud/tars.nodejsbase nodejs Servers/NodejsServer/NodejsHttp yaml/NodejsHttp.yaml latest true
+exec-helm.sh yaml/NodejsHttp.yaml latest
+exec-deploy.sh tars-dev demo-nodejshttp-1.0.0.tgz
+
+cd ${SERVERS_PATH}/NodejsServer/NodejsTars
+npm install
+cd ${SERVERS_PATH}/..
+exec-build.sh tarscloud/tars.nodejsbase nodejs Servers/NodejsServer/NodejsTars yaml/NodejsTars.yaml latest true
+exec-helm.sh yaml/NodejsTars.yaml latest
+exec-deploy.sh tars-dev demo-nodejstars-1.0.0.tgz
+
+
 # --------------------------------------php--------------------------------------
 LOG_DEBUG "Building PHP"
 cd ${SERVERS_PATH}/PhpServer/PHPHttp/src
@@ -103,37 +156,3 @@ cd ../scripts
 cd ../src
 rm -rf *.tar.gz
 composer run-script deploy
-
-# --------------------------------------golang--------------------------------------
-LOG_DEBUG "Building GoLang"
-cd ${SERVERS_PATH}/GoServer/GoHttp
-go mod vendor
-rm -rf *.tgz
-make tar
-cd ${SERVERS_PATH}/GoServer/GoTars
-go mod vendor
-rm -rf *.tgz
-make tar
-
-# --------------------------------------java--------------------------------------
-LOG_DEBUG "Building Java"
-cd ${SERVERS_PATH}/JavaServer/JavaHttp
-rm -rf ./target
-mvn package
-cd ${SERVERS_PATH}/JavaServer/JavaTars
-rm -rf ./target
-mvn package
-
-# --------------------------------------nodejs--------------------------------------
-LOG_DEBUG "Building Nodejs"
-source /root/.bashrc
-source /etc/profile
-npm install -g @tars/deploy
-cd ${SERVERS_PATH}/NodejsServer/NodejsHttp
-rm -rf *.tgz
-npm install
-tars-deploy NodejsHttp
-cd ${SERVERS_PATH}/NodejsServer/NodejsTars
-rm -rf *.tgz
-npm install
-tars-deploy NodejsTars
