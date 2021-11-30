@@ -1,0 +1,24 @@
+
+app: Demo
+server: CppTars
+template: tars.cpp
+profile: ""
+servants:
+  - name: HelloObj
+    port: 10000
+    isTars: true
+    isTcp: true
+    thread: 5
+    capacity: 100000
+    connection: 10000
+    timeout: 30000
+replicas: 2
+hostNetwork: false
+hostIPC: false
+hostPorts: []
+repo:
+  id:
+  image: tarscloud/demo.cpptars
+  secret: tars-image-secret
+config:
+  
