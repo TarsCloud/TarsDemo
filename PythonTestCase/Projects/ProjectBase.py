@@ -37,7 +37,7 @@ class Project(metaclass=ABCMeta):
     _http_template_name = ''
     _tars_template_name = ''
     # wait specific seconds after service published 
-    _wait_start_sec = 5
+    _wait_start_sec = 10
 
     def __init__(self, web_url, node_ip):
         """The base Class of projects test case
