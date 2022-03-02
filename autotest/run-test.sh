@@ -190,4 +190,4 @@ fi
 # ===============================run test=======================================
 cd ${TEST_PATH}/PythonTestCase/
 python3 run.py -u ${WEB_HOST} -n ${NODE_IP}
-python3 run.py -u ${WEB_HOST} -n ${NODE_IP}
+# python3 run.py -u ${WEB_HOST} -n ${NODE_IP}
